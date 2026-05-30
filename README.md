@@ -685,3 +685,5 @@ Body has a command-specific format.
 
 ## Licensing
 [GNU GPL license](https://github.com/blynkkk/blynk-server/blob/master/license.txt)
+
+`This is private version of Blynk server updated to Java 21`
