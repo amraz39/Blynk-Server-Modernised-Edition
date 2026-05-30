@@ -96,9 +96,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <release>11</release>
+                    <source>21</source>
+                    <target>21</target>
+                    <release>21</release>
                 </configuration>
             </plugin>
 
@@ -151,7 +151,7 @@
     <properties>
         <!-- maven plugins -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
@@ -165,7 +165,7 @@
         <async-http-client.version>2.12.3</async-http-client.version>
         <postgresql.version>42.2.16</postgresql.version>
         <HikariCP.version>3.4.1</HikariCP.version>
-        <qrgen.version>2.2.0</qrgen.version>
+        <qrgen.version>2.6.0</qrgen.version>
         <bcpg-jdk15on.version>1.66</bcpg-jdk15on.version>
         <acme4j-client.version>2.11</acme4j-client.version>
         <javax.mail.version>1.6.2</javax.mail.version>

@@ -90,6 +90,13 @@
             <artifactId>javase</artifactId>
             <version>${qrgen.version}</version>
             <scope>test</scope>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis-ext</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
