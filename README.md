@@ -67,14 +67,14 @@ For Windows download Java [here](https://www.oracle.com/technetwork/java/javase/
 
 ## Quick local server setup
 
-+ Make sure you are using Java 11
++ Make sure you are using Java 21
 
         java -version
-        Output: java version "11"
+        Output: java version "21"
 
 + Run the server on default 'hardware port 8080' and default 'application port 9443' (SSL port)
 
-        java -jar server-0.41.16.jar -dataFolder /path
+        java -jar server-0.41.18-java21.jar -dataFolder /path
         
 That's it! 
 
