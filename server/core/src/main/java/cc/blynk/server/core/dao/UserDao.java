@@ -97,29 +97,35 @@ public class UserDao {
         users.put(new UserKey(user), user);
     }
 
-    public Map<String, Integer> getBoardsUsage() {
-        Map<String, Integer> boards = new HashMap<>();
+    // REFACTOR: shared helper – avoids duplicated triple-nested loops across all stats methods.
+    // Uses Map.merge which correctly increments (no post-increment bug).
+    private Map<String, Integer> countByDeviceField(
+            java.util.function.Function<Device, String> fieldExtractor) {
+        Map<String, Integer> data = new HashMap<>();
         for (User user : users.values()) {
             for (DashBoard dashBoard : user.profile.dashBoards) {
                 for (Device device : dashBoard.devices) {
-                    if (device.boardType != null) {
-                        String label = device.boardType.label;
-                        Integer i = boards.getOrDefault(label, 0);
-                        boards.put(label, ++i);
+                    String key = fieldExtractor.apply(device);
+                    if (key != null) {
+                        data.merge(key, 1, Integer::sum);
                     }
                 }
             }
         }
-        return boards;
+        return data;
+    }
+
+    public Map<String, Integer> getBoardsUsage() {
+        return countByDeviceField(d -> d.boardType != null ? d.boardType.label : null);
     }
 
     public Map<String, Integer> getFacebookLogin() {
         Map<String, Integer> facebookLogin = new HashMap<>();
         for (User user : users.values()) {
-            facebookLogin.compute(
-                    user.isFacebookUser
-                            ? AppNameUtil.FACEBOOK
-                            : AppNameUtil.BLYNK, (k, v) -> v == null ? 1 : v++
+            // FIX: was v++ (post-increment, always stored old value); now uses merge
+            facebookLogin.merge(
+                    user.isFacebookUser ? AppNameUtil.FACEBOOK : AppNameUtil.BLYNK,
+                    1, Integer::sum
             );
         }
         return facebookLogin;
@@ -131,8 +137,7 @@ public class UserDao {
             for (DashBoard dashBoard : user.profile.dashBoards) {
                 if (dashBoard.widgets != null) {
                     for (Widget widget : dashBoard.widgets) {
-                        Integer i = widgets.getOrDefault(widget.getClass().getSimpleName(), 0);
-                        widgets.put(widget.getClass().getSimpleName(), ++i);
+                        widgets.merge(widget.getClass().getSimpleName(), 1, Integer::sum);
                     }
                 }
             }
@@ -143,75 +148,29 @@ public class UserDao {
     public Map<String, Integer> getProjectsPerUser() {
         Map<String, Integer> projectsPerUser = new HashMap<>();
         for (User user : users.values()) {
-            String key = String.valueOf(user.profile.dashBoards.length);
-            Integer i = projectsPerUser.getOrDefault(key, 0);
-            projectsPerUser.put(key, ++i);
+            projectsPerUser.merge(String.valueOf(user.profile.dashBoards.length), 1, Integer::sum);
         }
         return projectsPerUser;
     }
 
     public Map<String, Integer> getLibraryVersion() {
-        Map<String, Integer> data = new HashMap<>();
-        for (User user : users.values()) {
-            for (DashBoard dashBoard : user.profile.dashBoards) {
-                for (Device device : dashBoard.devices) {
-                    if (device.hardwareInfo != null && device.hardwareInfo.blynkVersion != null) {
-                        String key = device.hardwareInfo.blynkVersion;
-                        Integer i = data.getOrDefault(key, 0);
-                        data.put(key, ++i);
-                    }
-                }
-            }
-        }
-        return data;
+        return countByDeviceField(d ->
+                d.hardwareInfo != null ? d.hardwareInfo.blynkVersion : null);
     }
 
     public Map<String, Integer> getCpuType() {
-        Map<String, Integer> data = new HashMap<>();
-        for (User user : users.values()) {
-            for (DashBoard dashBoard : user.profile.dashBoards) {
-                for (Device device : dashBoard.devices) {
-                    if (device.hardwareInfo != null && device.hardwareInfo.cpuType != null) {
-                        String key = device.hardwareInfo.cpuType;
-                        Integer i = data.getOrDefault(key, 0);
-                        data.put(key, ++i);
-                    }
-                }
-            }
-        }
-        return data;
+        return countByDeviceField(d ->
+                d.hardwareInfo != null ? d.hardwareInfo.cpuType : null);
     }
 
     public Map<String, Integer> getConnectionType() {
-        Map<String, Integer> data = new HashMap<>();
-        for (User user : users.values()) {
-            for (DashBoard dashBoard : user.profile.dashBoards) {
-                for (Device device : dashBoard.devices) {
-                    if (device.hardwareInfo != null && device.hardwareInfo.connectionType != null) {
-                        String key = device.hardwareInfo.connectionType;
-                        Integer i = data.getOrDefault(key, 0);
-                        data.put(key, ++i);
-                    }
-                }
-            }
-        }
-        return data;
+        return countByDeviceField(d ->
+                d.hardwareInfo != null ? d.hardwareInfo.connectionType : null);
     }
 
     public Map<String, Integer> getHardwareBoards() {
-        Map<String, Integer> data = new HashMap<>();
-        for (User user : users.values()) {
-            for (DashBoard dashBoard : user.profile.dashBoards) {
-                for (Device device : dashBoard.devices) {
-                    if (device.hardwareInfo != null && device.hardwareInfo.boardType != null) {
-                        String key = device.hardwareInfo.boardType;
-                        Integer i = data.getOrDefault(key, 0);
-                        data.put(key, ++i);
-                    }
-                }
-            }
-        }
-        return data;
+        return countByDeviceField(d ->
+                d.hardwareInfo != null ? d.hardwareInfo.boardType : null);
     }
 
     public Map<String, Integer> getFilledSpace() {
@@ -221,15 +180,11 @@ public class UserDao {
                 int sum = 0;
                 for (Widget widget : dashBoard.widgets) {
                     if (widget.height < 0 || widget.width < 0) {
-                        //log.error("Widget without length fields. User : {}", user.name);
                         continue;
                     }
                     sum += widget.height * widget.width;
                 }
-
-                String key = String.valueOf(sum);
-                Integer i = filledSpace.getOrDefault(key, 0);
-                filledSpace.put(key, ++i);
+                filledSpace.merge(String.valueOf(sum), 1, Integer::sum);
             }
         }
         return filledSpace;
@@ -244,9 +199,7 @@ public class UserDao {
                         WebHook webHook = (WebHook) widget;
                         if (webHook.url != null) {
                             try {
-                                String key = getHost(webHook.url);
-                                Integer i = data.getOrDefault(key, 0);
-                                data.put(key, ++i);
+                                data.merge(getHost(webHook.url), 1, Integer::sum);
                             } catch (Exception e) {
                                 //don't care if we couldn't parse.
                             }

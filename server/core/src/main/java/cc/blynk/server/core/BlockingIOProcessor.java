@@ -38,22 +38,28 @@ public class BlockingIOProcessor implements Closeable {
     public BlockingIOProcessor(int poolSize, int maxQueueSize) {
         //pool size can't be less than 3.
         poolSize = Math.max(MINIMUM_ALLOWED_POOL_SIZE, poolSize);
+
+        // Use Math.max to avoid integer-division truncation producing 0 or 1-thread pools
+        int messagingCore = Math.max(2, poolSize / 4);
+        int messagingMax  = Math.max(2, poolSize / 3);
         this.messagingExecutor = new ThreadPoolExecutor(
-                poolSize / 4, poolSize / 3,
+                messagingCore, messagingMax,
                 2L, TimeUnit.MINUTES,
                 new ArrayBlockingQueue<>(maxQueueSize),
                 BlynkTPFactory.build("Messaging")
         );
 
         this.dbExecutor = new ThreadPoolExecutor(
-                poolSize / 3,
-                poolSize / 2, 2L,
+                Math.max(1, poolSize / 3),
+                Math.max(2, poolSize / 2), 2L,
                 TimeUnit.MINUTES,
                 new ArrayBlockingQueue<>(250),
                 BlynkTPFactory.build("db"));
         //local server doesn't use DB usually, so this thread may be not necessary
         this.dbExecutor.allowCoreThreadTimeOut(true);
 
+        // Dedicated single-thread pool for reporting DB writes; isolated so a
+        // main-DB outage does not block reporting and vice-versa.
         this.dbReportingExecutor = new ThreadPoolExecutor(
                 1,
                 1, 2L,
@@ -65,7 +71,8 @@ public class BlockingIOProcessor implements Closeable {
                 TimeUnit.MINUTES, new ArrayBlockingQueue<>(250),
                 BlynkTPFactory.build("getServer"));
 
-        this.historyExecutor = new ThreadPoolExecutor(poolSize / 4, poolSize / 2, 2L,
+        this.historyExecutor = new ThreadPoolExecutor(
+                Math.max(1, poolSize / 4), Math.max(2, poolSize / 2), 2L,
                 TimeUnit.MINUTES, new ArrayBlockingQueue<>(250),
                 BlynkTPFactory.build("history"));
     }
@@ -78,8 +85,9 @@ public class BlockingIOProcessor implements Closeable {
         dbExecutor.execute(task);
     }
 
+    // FIX: was incorrectly routing to dbExecutor; now correctly uses dbReportingExecutor
     public void executeReportingDB(Runnable task) {
-        dbExecutor.execute(task);
+        dbReportingExecutor.execute(task);
     }
 
     public void executeHistory(Runnable task) {
@@ -93,6 +101,7 @@ public class BlockingIOProcessor implements Closeable {
     @Override
     public void close() {
         dbExecutor.shutdown();
+        dbReportingExecutor.shutdown(); // FIX: was missing, leaked thread on shutdown
         messagingExecutor.shutdown();
         historyExecutor.shutdown();
         dbGetServerExecutor.shutdown();

@@ -30,6 +30,8 @@ import cc.blynk.utils.properties.SmsProperties;
 import cc.blynk.utils.properties.TwitterProperties;
 import io.netty.channel.epoll.Epoll;
 import io.netty.util.internal.SystemPropertyUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 
@@ -44,6 +46,8 @@ import java.util.concurrent.ConcurrentMap;
  * Created on 28.09.15.
  */
 public class Holder {
+
+    private static final Logger log = LogManager.getLogger(Holder.class);
 
     public final FileManager fileManager;
 
@@ -109,7 +113,7 @@ public class Holder {
                 ConcurrentMap<UserKey, User> allUsers = dbManager.userDBDao.getAllUsers(serverProperties.region);
                 this.userDao = new UserDao(allUsers, serverProperties.region, serverProperties.host);
             } catch (Exception e) {
-                System.out.println("Error restoring data from DB!");
+                log.error("Error restoring data from DB!");
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
@@ -150,7 +154,10 @@ public class Holder {
                 props.getProperty("http.port"),
                 props.getBoolProperty("force.port.80.for.csv")
         );
-        this.reportScheduler = new ReportScheduler(1, downloadUrl, mailWrapper, reportingDiskDao, userDao.users);
+        // FIX P-4: pool size now configurable; default Math.max(2, cores/2) instead of hardcoded 1
+        int reportPoolSize = props.getIntProperty("report.scheduler.pool.size",
+                Math.max(2, Runtime.getRuntime().availableProcessors() / 2));
+        this.reportScheduler = new ReportScheduler(reportPoolSize, downloadUrl, mailWrapper, reportingDiskDao, userDao.users);
 
         String contactEmail = serverProperties.getProperty("contact.email", mailProperties.getSMTPUsername());
         this.sslContextHolder = new SslContextHolder(props, contactEmail);
@@ -208,7 +215,10 @@ public class Holder {
                 props.getProperty("http.port"),
                 props.getBoolProperty("force.port.80.for.csv")
         );
-        this.reportScheduler = new ReportScheduler(1, downloadUrl, mailWrapper, reportingDiskDao, userDao.users);
+        // FIX P-4: pool size now configurable; default Math.max(2, cores/2) instead of hardcoded 1
+        int reportPoolSize = props.getIntProperty("report.scheduler.pool.size",
+                Math.max(2, Runtime.getRuntime().availableProcessors() / 2));
+        this.reportScheduler = new ReportScheduler(reportPoolSize, downloadUrl, mailWrapper, reportingDiskDao, userDao.users);
 
         this.sslContextHolder = new SslContextHolder(props, "test@blynk.cc");
         this.tokensPool = new TokensPool(serverProperties.getReportingFolder());
@@ -231,10 +241,10 @@ public class Holder {
 
         reportingDiskDao.close();
 
-        System.out.println("Stopping BlockingIOProcessor...");
+        log.info("Stopping BlockingIOProcessor...");
         blockingIOProcessor.close();
         reportScheduler.shutdown();
-        System.out.println("Stopping DBManager...");
+        log.info("Stopping DBManager...");
         dbManager.close();
         reportingDBManager.close();
         tokensPool.close();

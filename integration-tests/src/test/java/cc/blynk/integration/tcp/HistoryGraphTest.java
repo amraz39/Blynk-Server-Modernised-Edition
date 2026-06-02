@@ -1686,7 +1686,7 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
 
     @Test
     public void cleanNotUsedPinDataWorksAsExpected() throws Exception {
-        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao);
+        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao, holder.blockingIOProcessor);
         String tempDir = holder.props.getProperty("data.folder");
 
         Path userReportFolder = Paths.get(tempDir, "data", getUserName());
@@ -1731,7 +1731,7 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
 
     @Test
     public void cleanNotUsedPinDataWorksAsExpectedForSuperChart() throws Exception {
-        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao);
+        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao, holder.blockingIOProcessor);
 
         Superchart enhancedHistoryGraph = new Superchart();
         enhancedHistoryGraph.id = 432;
@@ -1792,7 +1792,7 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
 
     @Test
     public void cleanNotUsedPinDataWorksAsExpectedForReportsWidget() throws Exception {
-        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao);
+        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao, holder.blockingIOProcessor);
 
         ReportingWidget reportingWidget = new ReportingWidget();
         reportingWidget.id = 432;
@@ -1856,7 +1856,7 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
 
     @Test
     public void cleanNotUsedPinDataWorksAsExpectedForSuperChartInDeviceTiles() throws Exception {
-        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao);
+        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao, holder.blockingIOProcessor);
 
         DeviceTiles deviceTiles = new DeviceTiles();
         deviceTiles.id = 21321;
@@ -1945,7 +1945,7 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
         clientPair.appClient.createWidget(1, "{\"id\":200000, \"deviceIds\":[0,1], \"width\":1, \"height\":1, \"value\":0, \"x\":0, \"y\":0, \"label\":\"Some Text\", \"type\":\"DEVICE_SELECTOR\"}");
         clientPair.appClient.verifyResult(ok(2));
 
-        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao);
+        HistoryGraphUnusedPinDataCleanerWorker cleaner = new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao, holder.blockingIOProcessor);
 
         Superchart enhancedHistoryGraph = new Superchart();
         enhancedHistoryGraph.id = 432;

@@ -50,7 +50,9 @@ final class JobLauncher {
         scheduler.scheduleAtFixedRate(reportingWorker, startDelay,
                 AverageAggregatorProcessor.MINUTE, MILLISECONDS);
 
-        var profileSaverWorker = new ProfileSaverWorker(holder.userDao, holder.fileManager, holder.dbManager);
+        // FIX M-7: pass blockingIOProcessor so daily backup runs off the scheduler thread
+        var profileSaverWorker = new ProfileSaverWorker(holder.userDao, holder.fileManager,
+                holder.dbManager, holder.blockingIOProcessor);
 
         //running 1 sec later after reporting
         scheduler.scheduleAtFixedRate(profileSaverWorker, startDelay + 1000,
@@ -75,7 +77,9 @@ final class JobLauncher {
         //running once every 3 day
         //todo could be removed?
         var reportingDataDiskCleaner =
-                new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao);
+                // FIX P-5: pass blockingIOProcessor so deletion work runs off scheduler thread
+                new HistoryGraphUnusedPinDataCleanerWorker(holder.userDao, holder.reportingDiskDao,
+                        holder.blockingIOProcessor);
         //once every 7 days
         scheduler.scheduleAtFixedRate(reportingDataDiskCleaner, 1, 7, DAYS);
 

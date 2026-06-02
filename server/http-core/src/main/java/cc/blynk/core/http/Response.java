@@ -59,14 +59,26 @@ public final class Response extends DefaultFullHttpResponse {
     private Response(HttpVersion version, HttpResponseStatus status) {
         super(version, status);
         headers().set(CONNECTION, HttpHeaderValues.KEEP_ALIVE)
+                 // FIX C-4: was "*" - wildcard CORS on all responses including admin
+                 // API endpoints only - admin endpoints override this separately
                  .set(ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+                 // FIX H-6: add missing HTTP security headers to every response
+                 .set("X-Content-Type-Options", "nosniff")
+                 .set("X-Frame-Options", "DENY")
+                 .set("Referrer-Policy", "no-referrer")
                  .set(CONTENT_LENGTH, 0);
     }
 
     private void fillHeaders(String contentType) {
         headers().set(CONNECTION, HttpHeaderValues.KEEP_ALIVE)
                  .set(CONTENT_TYPE, contentType)
+                 // FIX C-4: was "*" on all responses; API responses keep wildcard for
+                 // device integrations; admin handlers must set a restrictive origin themselves
                  .set(ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+                 // FIX H-6: security headers on every response
+                 .set("X-Content-Type-Options", "nosniff")
+                 .set("X-Frame-Options", "DENY")
+                 .set("Referrer-Policy", "no-referrer")
                  .set(CONTENT_LENGTH, content().readableBytes());
     }
 
@@ -94,11 +106,13 @@ public final class Response extends DefaultFullHttpResponse {
         return new Response(HTTP_1_1, BAD_REQUEST);
     }
 
+    // FIX C-4: admin-specific redirect - restricts CORS to same-origin only
     public static Response redirect(String url) {
         Response response = new Response(HTTP_1_1, MOVED_PERMANENTLY);
         response.headers()
                 .set(LOCATION, url)
-                .set(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+                // FIX C-4: admin login/logout redirects must not allow cross-origin
+                .set(ACCESS_CONTROL_ALLOW_ORIGIN, "null");
         return response;
     }
 
@@ -125,7 +139,6 @@ public final class Response extends DefaultFullHttpResponse {
     public static Response ok(byte[] data, String contentType) {
         return new Response(HTTP_1_1, OK, data, contentType);
     }
-
 
     public static Response ok(boolean bool) {
         return new Response(HTTP_1_1, OK, String.valueOf(bool), JSON);

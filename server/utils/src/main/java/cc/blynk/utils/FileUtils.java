@@ -197,14 +197,29 @@ public final class FileUtils {
     }
 
     public static Path getUserReportDir(String email, String appName, int reportId, String date) {
-        return Paths.get(FileUtils.CSV_DIR, email + "_" + appName + "_" + reportId + "_" + date);
+        // FIX H-4: sanitize email before using in filesystem path
+        return Paths.get(FileUtils.CSV_DIR,
+                sanitizeForFilesystem(email) + "_" + appName + "_" + reportId + "_" + date);
+    }
+
+    /**
+     * FIX H-4: Sanitize an email address for safe use as a filesystem path component.
+     * Strips any characters that could enable path traversal (../ etc.) or path
+     * separator injection on Windows (\) and Unix (/). Keeps chars valid for all
+     * major filesystems: letters, digits, @, ., -, _
+     */
+    public static String sanitizeForFilesystem(String email) {
+        if (email == null) return "_";
+        return email.replaceAll("[^a-zA-Z0-9@._\\-]", "_");
     }
 
     public static String getUserStorageDir(String email, String appName) {
+        // FIX H-4: sanitize email before using as directory name
+        String safeEmail = sanitizeForFilesystem(email);
         if (AppNameUtil.BLYNK.equals(appName)) {
-            return email;
+            return safeEmail;
         }
-        return email + "_" + appName;
+        return safeEmail + "_" + appName;
     }
 
     public static String downloadUrl(String host, String httpPort, boolean forcePort80) {

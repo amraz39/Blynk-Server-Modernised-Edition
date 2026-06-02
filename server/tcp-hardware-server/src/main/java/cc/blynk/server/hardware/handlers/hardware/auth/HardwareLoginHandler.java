@@ -130,7 +130,7 @@ public class HardwareLoginHandler extends SimpleChannelInboundHandler<LoginMessa
         HardwareStateHolder hardwareStateHolder = new HardwareStateHolder(user, dash, device);
 
         ChannelPipeline pipeline = ctx.pipeline();
-        pipeline.replace(this, "HHArdwareHandler", new HardwareHandler(holder, hardwareStateHolder));
+        pipeline.replace(this, "HardwareHandler", new HardwareHandler(holder, hardwareStateHolder));
 
         Session session = holder.sessionDao.getOrCreateSessionByUser(
                 hardwareStateHolder.userKey, ctx.channel().eventLoop());

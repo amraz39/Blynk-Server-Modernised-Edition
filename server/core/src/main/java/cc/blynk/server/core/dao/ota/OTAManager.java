@@ -109,7 +109,15 @@ public class OTAManager {
     }
 
     private String fetchBuildNumber(String pathToFirmware) {
-        Path path = Paths.get(staticFilesFolder, pathToFirmware);
+        // FIX H-5: canonicalize and validate path stays inside staticFilesFolder
+        Path root = Paths.get(staticFilesFolder).normalize().toAbsolutePath();
+        Path candidate = Paths.get(staticFilesFolder, pathToFirmware).normalize().toAbsolutePath();
+        if (!candidate.startsWith(root)) {
+            log.error("OTA path traversal attempt blocked. Firmware path '{}' escapes static folder.",
+                    pathToFirmware);
+            return null;
+        }
+        Path path = candidate;
         return getBuildPatternFromString(path);
     }
 

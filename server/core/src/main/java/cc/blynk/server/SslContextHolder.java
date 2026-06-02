@@ -106,14 +106,13 @@ public class SslContextHolder {
 
     public void generateInitialCertificates(ServerProperties props) {
         if (isAutoGenerationEnabled && isNeedInitializeOnStart) {
-            System.out.println("Generating own initial certificates...");
+            log.info("Generating own initial certificates...");
             try {
                 regenerate();
-                System.out.println("Success! The certificate for your domain "
-                        + props.getProperty("server.host") + " has been generated!");
+                log.info("Success! The certificate for your domain {} has been generated!", props.getProperty("server.host"));
             } catch (Exception e) {
-                System.out.println("Error during certificate generation.");
-                System.out.println(e.getMessage());
+                log.error("Error during certificate generation.");
+                log.error("Certificate generation error: {}", e.getMessage());
             }
         }
     }
@@ -130,7 +129,7 @@ public class SslContextHolder {
                                 + " Please replace it with your own certs.",
                         serverCert.getAbsolutePath(), serverKey.getAbsolutePath());
 
-                return build(sslProvider);
+                return buildSelfSigned(sslProvider);
             }
 
             return build(serverCert, serverKey, serverPass, sslProvider);
@@ -149,6 +148,17 @@ public class SslContextHolder {
         return SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey())
                 .sslProvider(sslProvider)
                 .build();
+    }
+
+    // FIX: self-signed cert path now also honours onlyLatestTLS flag
+    public SslContext buildSelfSigned(SslProvider sslProvider) throws CertificateException, SSLException {
+        SelfSignedCertificate ssc = new SelfSignedCertificate();
+        SslContextBuilder builder = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey())
+                .sslProvider(sslProvider);
+        if (this.onlyLatestTLS) {
+            builder.protocols("TLSv1.3", "TLSv1.2");
+        }
+        return builder.build();
     }
 
     public SslContext build(File serverCert, File serverKey,

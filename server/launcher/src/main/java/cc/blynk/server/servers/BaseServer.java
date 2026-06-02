@@ -7,6 +7,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.ServerChannel;
+import io.netty.channel.WriteBufferWaterMark;
 import io.netty.channel.socket.SocketChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,7 +54,17 @@ public abstract class BaseServer {
         try {
             b.group(bossGroup, workerGroup)
                     .channel(channelClass)
+                    // FIX P-1: was using OS default backlog (50-128); raise to handle
+                    // connection storms (e.g. many IoT devices reconnecting after power cycle)
+                    .option(ChannelOption.SO_BACKLOG, 1024)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    // FIX M-3: disable Nagle's algorithm - Blynk messages are small and
+                    // latency-sensitive; buffering them adds unnecessary delay
+                    .childOption(ChannelOption.TCP_NODELAY, true)
+                    // FIX M-3: bound the per-channel write buffer to prevent unbounded heap
+                    // growth when hardware clients are slow/stalled during fan-out writes
+                    .childOption(ChannelOption.WRITE_BUFFER_WATER_MARK,
+                            new WriteBufferWaterMark(8 * 1024, 32 * 1024))
                     .childHandler(getChannelInitializer());
 
             var listenTo = (listenAddress == null || listenAddress.isEmpty())

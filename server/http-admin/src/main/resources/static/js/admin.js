@@ -333,7 +333,22 @@ app.config(['NgAdminConfigurationProvider', function (nga) {
             nga.field('body', 'text')
         );
 
-        // customize menu
+    // Add logout button to the top navigation bar
+    admin.header('<div class="navbar-header">' +
+        '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">' +
+        '<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>' +
+        '<span class="icon-bar"></span><span class="icon-bar"></span></button>' +
+        '<a class="navbar-brand" href="#" ng-click="appController.displayHome()">Blynk Administration</a></div>' +
+        '<div class="collapse navbar-collapse navbar-ex1-collapse">' +
+        '<ul class="nav navbar-nav navbar-right">' +
+        '<li><a href="#" onclick="' +
+            'document.cookie=\'session=;expires=Thu,01 Jan 1970 00:00:00 GMT;path=/\';' +
+            'var f=document.createElement(\'form\');f.method=\'POST\';f.action=\'/admin/logout\';' +
+            'document.body.appendChild(f);f.submit();return false;">' +
+        '<span class="glyphicon glyphicon-off"></span> Logout</a></li>' +
+        '</ul></div>');
+
+    // customize menu
     admin.menu(nga.menu().autoClose(false)
             .addChild(nga.menu(users).icon('<span class="glyphicon glyphicon-user"></span>'))
             .addChild(nga.menu().title('Stats')

@@ -165,13 +165,22 @@ public class MobileLoginHandler extends SimpleChannelInboundHandler<LoginMessage
             return;
         }
 
-        if (!user.pass.equals(pass)) {
+        if (!safeEquals(user.pass, pass)) {
             log.warn("User '{}' credentials are wrong. {}", email, ctx.channel().remoteAddress());
             ctx.writeAndFlush(notAuthenticated(msgId), ctx.voidPromise());
             return;
         }
 
         login(ctx, msgId, user, version);
+    }
+
+    // FIX H-2: constant-time comparison prevents timing-based password recovery attacks
+    private static boolean safeEquals(String stored, String incoming) {
+        if (stored == null || incoming == null) return false;
+        return java.security.MessageDigest.isEqual(
+                stored.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+                incoming.getBytes(java.nio.charset.StandardCharsets.UTF_8)
+        );
     }
 
     private void login(ChannelHandlerContext ctx, int messageId, User user, Version version) {

@@ -1,0 +1,56 @@
+# Blynk Server systemd unit file
+# Install to: /etc/systemd/system/blynk-server.service
+#
+# Enable and start:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable blynk-server
+#   sudo systemctl start blynk-server
+#
+# View logs:
+#   journalctl -u blynk-server -f
+
+[Unit]
+Description=Blynk IoT Server
+Documentation=https://github.com/blynkkk/blynk-server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Run as a dedicated non-root user (create with: useradd -r -s /sbin/nologin blynk)
+User=blynk
+Group=blynk
+
+# Adjust paths to match your installation
+WorkingDirectory=/opt/blynk
+ExecStart=/usr/bin/java \
+    -server \
+    -Xms64m \
+    -Xmx512m \
+    -XX:+UseZGC \
+    -Dio.netty.leakDetection.level=disabled \
+    -Dfile.encoding=UTF-8 \
+    ${JAVA_OPTS} \
+    -jar /opt/blynk/server.jar \
+    -dataFolder /var/lib/blynk \
+    -serverConfig /etc/blynk/server.properties
+
+# Restart policy
+Restart=on-failure
+RestartSec=10s
+
+# Raise the file descriptor limit for many concurrent hardware connections
+LimitNOFILE=65536
+
+# Redirect stdout/stderr to journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=blynk-server
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 package cc.blynk.server.workers;
 
+import cc.blynk.server.core.BlockingIOProcessor;
 import cc.blynk.server.core.dao.ReportingDiskDao;
 import cc.blynk.server.core.dao.UserDao;
 import cc.blynk.server.core.model.DashBoard;
@@ -40,30 +41,33 @@ public class HistoryGraphUnusedPinDataCleanerWorker implements Runnable {
 
     private final UserDao userDao;
     private final ReportingDiskDao reportingDao;
+    // FIX P-5: heavy file-deletion work submitted here instead of blocking the scheduler thread
+    private final BlockingIOProcessor blockingIOProcessor;
 
     private long lastStart;
 
-    public HistoryGraphUnusedPinDataCleanerWorker(UserDao userDao, ReportingDiskDao reportingDao) {
+    public HistoryGraphUnusedPinDataCleanerWorker(UserDao userDao, ReportingDiskDao reportingDao,
+                                                   BlockingIOProcessor blockingIOProcessor) {
         this.userDao = userDao;
         this.reportingDao = reportingDao;
+        this.blockingIOProcessor = blockingIOProcessor;
         this.lastStart = System.currentTimeMillis();
-
     }
 
     @Override
     public void run() {
-        try {
-            log.info("Start removing unused reporting data...");
-
-            long now = System.currentTimeMillis();
-            int result = removeUnsedInHistoryGraphData();
-
-            lastStart = now;
-
-            log.info("Removed {} files. Time : {} ms.", result, System.currentTimeMillis() - now);
-        } catch (Throwable t) {
-            log.error("Error removing unused reporting data.", t);
-        }
+        // FIX P-5: submit work to history executor so the scheduler timer thread returns immediately
+        blockingIOProcessor.executeHistory(() -> {
+            try {
+                log.info("Start removing unused reporting data...");
+                long now = System.currentTimeMillis();
+                int result = removeUnsedInHistoryGraphData();
+                lastStart = now;
+                log.info("Removed {} files. Time : {} ms.", result, System.currentTimeMillis() - now);
+            } catch (Throwable t) {
+                log.error("Error removing unused reporting data.", t);
+            }
+        });
     }
 
     private int removeUnsedInHistoryGraphData() {

@@ -51,7 +51,11 @@ public class Limits {
         this.webhookResponseSizeLimitBytes = props.getIntProperty("webhooks.response.size.limit", 64) * 1024;
         this.webhookFailureLimit =
                 isUnlimited(props.getIntProperty("webhooks.failure.count.limit", 10), Integer.MAX_VALUE);
-        this.hardwareIdleTimeout = props.getIntProperty("hard.socket.idle.timeout", 0);
+        // FIX: was 0 (disabled by default in code), meaning hardware sockets were never
+        // cleaned up on network failure unless operator explicitly set the property.
+        // server.properties already defaults to 10; aligning code default to 60 for
+        // bare-metal installs that don't use the bundled server.properties.
+        this.hardwareIdleTimeout = props.getIntProperty("hard.socket.idle.timeout", 60);
         this.appIdleTimeout = props.getIntProperty("app.socket.idle.timeout", 300);
 
         this.hourlyRegistrationsLimit = props.getIntProperty("hourly.registrations.limit", 1000);

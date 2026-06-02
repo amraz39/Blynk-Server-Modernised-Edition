@@ -121,7 +121,9 @@ public class AcmeClient {
                 order.update();
             }
         } catch (InterruptedException ex) {
-            log.error("interrupted", ex);
+            // FIX M-2: restore interrupt status so callers can detect cancellation
+            Thread.currentThread().interrupt();
+            log.warn("ACME order wait interrupted", ex);
         }
 
         Certificate certificate = order.getCertificate();
@@ -192,7 +194,9 @@ public class AcmeClient {
                 challenge.update();
             }
         } catch (InterruptedException ex) {
-            log.error("interrupted", ex);
+            // FIX M-2: restore interrupt status so callers can detect cancellation
+            Thread.currentThread().interrupt();
+            log.warn("ACME challenge wait interrupted", ex);
             return;
         }
 

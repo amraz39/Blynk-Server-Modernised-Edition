@@ -33,12 +33,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import static cc.blynk.server.core.protocol.handlers.DefaultExceptionHandler.handleGeneralException;
@@ -66,8 +64,10 @@ public class StaticFileHandler extends ChannelInboundHandlerAdapter {
 
     private static final Logger log = LogManager.getLogger(StaticFileHandler.class);
 
-    private static final String HTTP_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
-    private static final String HTTP_DATE_GMT_TIMEZONE = "GMT";
+    // FIX M-1/P-7: DateTimeFormatter is thread-safe; SimpleDateFormat was not
+    private static final DateTimeFormatter HTTP_DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US)
+                             .withZone(ZoneId.of("GMT"));
     private static final int HTTP_CACHE_SECONDS = 60;
 
     /**
@@ -113,11 +113,7 @@ public class StaticFileHandler extends ChannelInboundHandlerAdapter {
      *            HTTP response
      */
     private static void setDateHeader(FullHttpResponse response) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat(HTTP_DATE_FORMAT, Locale.US);
-        dateFormatter.setTimeZone(TimeZone.getTimeZone(HTTP_DATE_GMT_TIMEZONE));
-
-        Calendar time = new GregorianCalendar();
-        response.headers().set(DATE, dateFormatter.format(time.getTime()));
+        response.headers().set(DATE, HTTP_DATE_FORMATTER.format(ZonedDateTime.now()));
     }
 
     /**
@@ -129,19 +125,16 @@ public class StaticFileHandler extends ChannelInboundHandlerAdapter {
      *            file to extract content type
      */
     private static void setDateAndCacheHeaders(io.netty.handler.codec.http.HttpResponse response, File fileToCache) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat(HTTP_DATE_FORMAT, Locale.US);
-        dateFormatter.setTimeZone(TimeZone.getTimeZone(HTTP_DATE_GMT_TIMEZONE));
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("GMT"));
+        ZonedDateTime expires = now.plusSeconds(HTTP_CACHE_SECONDS);
+        ZonedDateTime lastModified = ZonedDateTime.ofInstant(
+                java.time.Instant.ofEpochMilli(fileToCache.lastModified()), ZoneId.of("GMT"));
 
-        // Date header
-        Calendar time = new GregorianCalendar();
-        response.headers().set(DATE, dateFormatter.format(time.getTime()));
-
-        // Add cache headers
-        time.add(Calendar.SECOND, HTTP_CACHE_SECONDS);
         response.headers()
-                .set(EXPIRES, dateFormatter.format(time.getTime()))
+                .set(DATE, HTTP_DATE_FORMATTER.format(now))
+                .set(EXPIRES, HTTP_DATE_FORMATTER.format(expires))
                 .set(CACHE_CONTROL, "private, max-age=" + HTTP_CACHE_SECONDS)
-                .set(LAST_MODIFIED, dateFormatter.format(new Date(fileToCache.lastModified())));
+                .set(LAST_MODIFIED, HTTP_DATE_FORMATTER.format(lastModified));
     }
 
     @Override
@@ -199,8 +192,34 @@ public class StaticFileHandler extends ChannelInboundHandlerAdapter {
             if (staticFile instanceof StaticFileEdsWith) {
                 StaticFileEdsWith staticFileEdsWith = (StaticFileEdsWith) staticFile;
                 path = Paths.get(staticFileEdsWith.folderPathForStatic, uri);
+                // FIX C-2: canonical path guard - verify resolved path stays inside root
+                try {
+                    Path root = Paths.get(staticFileEdsWith.folderPathForStatic).toRealPath();
+                    Path resolved = path.normalize().toAbsolutePath();
+                    if (!resolved.startsWith(root)) {
+                        log.warn("Path traversal attempt blocked: '{}'", uri);
+                        sendError(ctx, NOT_FOUND);
+                        return;
+                    }
+                } catch (Exception ignored) {
+                    // toRealPath throws if file doesn't exist yet; normalize() is sufficient
+                    path = path.normalize();
+                    Path root = Paths.get(staticFileEdsWith.folderPathForStatic).normalize().toAbsolutePath();
+                    if (!path.toAbsolutePath().startsWith(root)) {
+                        log.warn("Path traversal attempt blocked: '{}'", uri);
+                        sendError(ctx, NOT_FOUND);
+                        return;
+                    }
+                }
             } else {
-                path = Paths.get(jarPath, uri);
+                path = Paths.get(jarPath, uri).normalize();
+                // FIX C-2: canonical path guard for jar-relative paths
+                Path root = Paths.get(jarPath).normalize().toAbsolutePath();
+                if (!path.toAbsolutePath().startsWith(root)) {
+                    log.warn("Path traversal attempt blocked: '{}'", uri);
+                    sendError(ctx, NOT_FOUND);
+                    return;
+                }
             }
         } else {
             //for local mode / running from ide
@@ -219,16 +238,18 @@ public class StaticFileHandler extends ChannelInboundHandlerAdapter {
         // Cache Validation
         String ifModifiedSince = request.headers().get(IF_MODIFIED_SINCE);
         if (ifModifiedSince != null && !ifModifiedSince.isEmpty() && !(staticFile instanceof NoCacheStaticFile)) {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat(HTTP_DATE_FORMAT, Locale.US);
-            Date ifModifiedSinceDate = dateFormatter.parse(ifModifiedSince);
-
-            // Only compare up to the second because the datetime format we send to the client
-            // does not have milliseconds
-            long ifModifiedSinceDateSeconds = ifModifiedSinceDate.getTime() / 1000;
-            long fileLastModifiedSeconds = file.lastModified() / 1000;
-            if (ifModifiedSinceDateSeconds == fileLastModifiedSeconds) {
-                sendNotModified(ctx);
-                return;
+            try {
+                // FIX M-1/P-7: use thread-safe DateTimeFormatter instead of SimpleDateFormat
+                long ifModifiedSinceDateSeconds =
+                        HTTP_DATE_FORMATTER.parse(ifModifiedSince, java.time.ZonedDateTime::from)
+                                           .toEpochSecond();
+                long fileLastModifiedSeconds = file.lastModified() / 1000;
+                if (ifModifiedSinceDateSeconds == fileLastModifiedSeconds) {
+                    sendNotModified(ctx);
+                    return;
+                }
+            } catch (Exception ignored) {
+                // Malformed If-Modified-Since header — serve the file normally
             }
         }
 

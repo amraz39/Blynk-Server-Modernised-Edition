@@ -349,7 +349,7 @@ public class ReportingDiskDao implements Closeable {
 
     @Override
     public void close() {
-        System.out.println("Stopping aggregator...");
+        log.info("Stopping aggregator...");
         this.averageAggregator.close();
     }
 }

@@ -61,10 +61,9 @@ public class FileManager {
 
     public FileManager(String dataFolder, String host) {
         if (dataFolder == null || dataFolder.isEmpty() || dataFolder.equals("/path")) {
-            System.out.println("WARNING : '" + dataFolder + "' does not exists. "
-                    + "Please specify correct -dataFolder parameter.");
+            log.warn("WARNING : '{}' does not exist. Please specify correct -dataFolder parameter.", dataFolder);
             dataFolder = Paths.get(System.getProperty("java.io.tmpdir"), "blynk").toString();
-            System.out.println("Your data may be lost during server restart. Using temp folder : " + dataFolder);
+            log.warn("Your data may be lost during server restart. Using temp folder : {}", dataFolder);
         }
         try {
             Path dataFolderPath = Paths.get(dataFolder);
@@ -75,10 +74,8 @@ public class FileManager {
         } catch (Exception e) {
             Path tempDir = Paths.get(System.getProperty("java.io.tmpdir"), "blynk");
 
-            System.out.println("WARNING : could not find folder '" + dataFolder + "'. "
-                    + "Please specify correct -dataFolder parameter.");
-            System.out.println("Your data may be lost during server restart. Using temp folder : "
-                    + tempDir.toString());
+            log.warn("WARNING : could not find folder '{}'. Please specify correct -dataFolder parameter.", dataFolder);
+            log.warn("Your data may be lost during server restart. Using temp folder : {}", tempDir);
 
             try {
                 this.dataDir = createDirectories(tempDir);
@@ -105,9 +102,20 @@ public class FileManager {
         return Paths.get(dataDir.toString(), email + "." + appName + USER_FILE_EXTENSION);
     }
 
+    // FIX M-1: accepts pre-computed date string from caller (DateTimeFormatter, thread-safe)
+    // FIX H-4: sanitize email before using in filesystem path
+    public Path generateBackupFileName(String email, String appName, String dateStr) {
+        String safeEmail = cc.blynk.utils.FileUtils.sanitizeForFilesystem(email);
+        return Paths.get(backupDataDir.toString(),
+                safeEmail + "." + appName + ".user." + dateStr);
+    }
+
+    // Keep backward-compatible overload for any existing callers
     public Path generateBackupFileName(String email, String appName) {
-        return Paths.get(backupDataDir.toString(), email + "." + appName + ".user."
-                + new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        String dateStr = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                .withZone(java.time.ZoneId.systemDefault())
+                .format(java.time.Instant.now());
+        return generateBackupFileName(email, appName, dateStr);
     }
 
     private Path generateOldFileName(String userName) {

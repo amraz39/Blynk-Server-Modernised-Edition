@@ -46,7 +46,9 @@ public class ProfileSaverWorkerTest {
 
     @Test
     public void testCorrectProfilesAreSaved() throws IOException {
-        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(userDao, fileManager, new DBManager(blockingIOProcessor, true));
+        // FIX: updated constructor call to pass blockingIOProcessor (required by M-7 fix)
+        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(userDao, fileManager,
+                new DBManager(blockingIOProcessor, true), blockingIOProcessor);
 
         User user1 = new User("1", "", AppNameUtil.BLYNK, "local", "127.0.0.1", false, false);
         User user2 = new User("2", "", AppNameUtil.BLYNK, "local", "127.0.0.1", false, false);
@@ -84,7 +86,9 @@ public class ProfileSaverWorkerTest {
 
         Thread.sleep(1);
 
-        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(userDao, fileManager, new DBManager(blockingIOProcessor, true));
+        // FIX: updated constructor call to pass blockingIOProcessor (required by M-7 fix)
+        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(userDao, fileManager,
+                new DBManager(blockingIOProcessor, true), blockingIOProcessor);
 
         when(userDao.getUsers()).thenReturn(userMap);
         profileSaverWorker.run();

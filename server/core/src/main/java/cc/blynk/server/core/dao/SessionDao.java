@@ -64,6 +64,15 @@ public class SessionDao {
         return sessionId;
     }
 
+    // FIX: sessions were never removed on logout, causing unbounded memory growth
+    // and allowing stolen cookies to remain valid forever.
+    public void invalidateSession(String sessionId) {
+        if (sessionId != null && !sessionId.isEmpty()) {
+            httpSession.remove(sessionId);
+            log.debug("HTTP session invalidated.");
+        }
+    }
+
     public boolean isValid(Cookie cookie) {
         return cookie.name().equals(SESSION_COOKIE);
     }
@@ -86,13 +95,27 @@ public class SessionDao {
         return null;
     }
 
+    // Returns the session token from the request cookie, or null if absent.
+    public String getSessionTokenFromCookie(FullHttpRequest request) {
+        String cookieString = request.headers().get(HttpHeaderNames.COOKIE);
+        if (cookieString != null) {
+            Set<Cookie> cookies = ServerCookieDecoder.STRICT.decode(cookieString);
+            for (Cookie cookie : cookies) {
+                if (isValid(cookie)) {
+                    return cookie.value();
+                }
+            }
+        }
+        return null;
+    }
+
     public void closeHardwareChannelByDashId(UserKey userKey, int dashId) {
         Session session = userSession.get(userKey);
         session.closeHardwareChannelByDashId(dashId);
     }
 
     public void close() {
-        System.out.println("Closing all sockets...");
+        log.info("Closing all sockets...");
         DefaultChannelGroup allChannels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
         userSession.forEach((userKey, session) -> {
             allChannels.addAll(session.appChannels);

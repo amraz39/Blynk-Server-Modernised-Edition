@@ -108,9 +108,25 @@ public class DBManager implements Closeable {
 
         config.setAutoCommit(false);
         config.setConnectionTimeout(serverProperties.getLongProperty("connection.timeout.millis"));
-        config.setMaximumPoolSize(5);
-        config.setMaxLifetime(0);
-        config.setConnectionTestQuery("SELECT 1");
+
+        // FIX: was hardcoded 5; now configurable via db.properties (default 5)
+        int poolSize = 5;
+        try {
+            String ps = serverProperties.getProperty("db.pool.size");
+            if (ps != null && !ps.isEmpty()) {
+                poolSize = Integer.parseInt(ps.trim());
+            }
+        } catch (NumberFormatException ignored) {
+        }
+        config.setMaximumPoolSize(poolSize);
+
+        // FIX: was 0 (infinite lifetime), which prevents stale connection recycling.
+        // Set to 9.5 minutes — safely below PostgreSQL default idle_timeout of 10 min.
+        config.setMaxLifetime(570_000);
+
+        // FIX: removed setConnectionTestQuery("SELECT 1"); HikariCP 3+ uses
+        // Connection.isValid() by default which is faster than a round-trip query.
+
         return config;
     }
 
@@ -233,7 +249,7 @@ public class DBManager implements Closeable {
     @Override
     public void close() {
         if (isDBEnabled()) {
-            System.out.println("Closing DB...");
+            log.info("Closing DB...");
             ds.close();
         }
     }

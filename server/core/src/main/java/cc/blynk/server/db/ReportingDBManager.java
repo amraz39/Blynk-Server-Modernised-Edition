@@ -131,7 +131,7 @@ public class ReportingDBManager implements Closeable {
     @Override
     public void close() {
         if (isDBEnabled()) {
-            System.out.println("Closing Reporting DB...");
+            log.info("Closing Reporting DB...");
             ds.close();
         }
     }

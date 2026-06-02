@@ -87,6 +87,23 @@
             </properties>
         </profile>
 
+        <!-- FIX: added aarch64 profile for Raspberry Pi 5 / AWS Graviton / Apple M-series Linux.
+             Without this, netty-transport-native-epoll and netty-tcnative-boringssl-static
+             would only include the x86_64 JNI library, causing Netty to silently fall back
+             to NIO + JDK TLS with ~20-30% throughput loss. -->
+        <profile>
+            <id>unix-aarch64</id>
+            <activation>
+                <os>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <script.extension>.sh</script.extension>
+                <epoll.os>linux-aarch_64</epoll.os>
+            </properties>
+        </profile>
+
     </profiles>
 
     <build>

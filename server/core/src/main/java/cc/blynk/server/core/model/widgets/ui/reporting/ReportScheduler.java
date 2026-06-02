@@ -37,7 +37,10 @@ public class ReportScheduler extends ScheduledThreadPoolExecutor {
 
     public ReportScheduler(int corePoolSize, String downloadUrl,
                            MailWrapper mailWrapper, ReportingDiskDao reportingDao, Map<UserKey, User> users) {
-        super(corePoolSize,  BlynkTPFactory.build("report"));
+        // FIX P-4: corePoolSize now passed in from Holder (read from server.properties
+        // key "report.scheduler.pool.size", default Math.max(2, availableProcessors/2))
+        // Previously hardcoded to 1 causing all reports to execute serially.
+        super(Math.max(1, corePoolSize), BlynkTPFactory.build("report"));
         setRemoveOnCancelPolicy(true);
         setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
         this.map = new ConcurrentHashMap<>();
@@ -131,6 +134,17 @@ public class ReportScheduler extends ScheduledThreadPoolExecutor {
             return false;
         }
         return scheduledFuture.cancel(true);
+    }
+
+    /**
+     * FIX M-5: The map of ScheduledFutures was never pruned of completed/cancelled entries,
+     * causing unbounded growth when users create and delete many reports. This hook removes
+     * completed futures after each execution so the map stays small.
+     */
+    @Override
+    protected void afterExecute(Runnable r, Throwable t) {
+        super.afterExecute(r, t);
+        map.values().removeIf(future -> future.isDone() || future.isCancelled());
     }
 
 }

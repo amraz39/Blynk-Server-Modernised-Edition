@@ -2,6 +2,8 @@ package cc.blynk.server.workers;
 
 import cc.blynk.server.Holder;
 import cc.blynk.server.servers.BaseServer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -13,6 +15,8 @@ import java.util.concurrent.ScheduledExecutorService;
  * Created on 25.03.15.
  */
 public class ShutdownHookWorker implements Runnable {
+
+    private static final Logger log = LogManager.getLogger(ShutdownHookWorker.class);
 
     private final BaseServer[] servers;
     private final Holder holder;
@@ -30,30 +34,31 @@ public class ShutdownHookWorker implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Catch shutdown hook.");
-        System.out.println("Stopping servers...");
+        // FIX: replaced System.out.println with Log4j2 so shutdown messages appear in log files
+        log.info("Catch shutdown hook.");
+        log.info("Stopping servers...");
 
         for (var server : servers) {
             try {
                 server.close().sync();
             } catch (Throwable t) {
-                System.out.println("Error on server shutdown : " + t.getCause());
+                log.error("Error on server shutdown.", t.getCause());
             }
         }
 
-        System.out.println("Stopping scheduler...");
+        log.info("Stopping scheduler...");
         scheduler.shutdown();
 
         try {
             holder.close();
         } catch (Exception e) {
-            System.out.println("Error stopping holder...");
+            log.error("Error stopping holder.", e);
         }
 
-        System.out.println("Saving user profiles...");
+        log.info("Saving user profiles...");
         profileSaverWorker.close();
 
-        System.out.println("Done.");
+        log.info("Shutdown complete.");
     }
 
 }

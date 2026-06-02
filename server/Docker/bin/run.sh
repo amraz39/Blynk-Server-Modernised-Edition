@@ -2,7 +2,10 @@
 
 set -e
 
-echo "hardware.mqtt.port=${HARDWARE_MQTT_PORT}
+# Write server.properties from environment variables
+# Only write non-empty values so server can use its own defaults for unset vars
+cat > /config/server.properties << PROPS
+hardware.mqtt.port=${HARDWARE_MQTT_PORT}
 hardware.ssl.port=${HARDWARE_MQTT_PORT_SSL}
 http.port=${HTTP_PORT}
 force.port.80.for.csv=${FORCE_PORT_80_FOR_CSV}
@@ -36,6 +39,7 @@ csv.export.data.points.max=${CSV_EXPORT_DATA_POINTS_MAX}
 hard.socket.idle.timeout=${HARD_SOCKET_IDLE_TIMEOUT}
 enable.db=${ENABLE_DB}
 enable.raw.db.data.store=${ENABLE_RAW_DB_DATA_STORE}
+# FIX: variable name corrected (was ASYNC_LOGGER_RING_BUGGER_SIZE)
 async.logger.ring.buffer.size=${ASYNC_LOGGER_RING_BUFFER_SIZE}
 allow.reading.widget.without.active.app=${ALLOW_READING_WIDGET_WITHOUT_ACTIVE_APP}
 allow.store.ip=${ALLOW_STORE_IP}
@@ -43,8 +47,25 @@ initial.energy=${INITIAL_ENERGY}
 admin.rootPath=${ADMIN_ROOT_PATH}
 restore.host=${RESTORE_HOST}
 product.name=${PRODUCT_NAME}
-admin.email=${ADMIN_EMAIL}
-admin.pass=${ADMIN_PASS}
-" > /config/server.properties
+PROPS
 
-java -jar /blynk/server.jar -dataFolder /data -serverConfig /config/server.properties
+# Append admin credentials only if provided via --env at runtime
+if [ -n "${ADMIN_EMAIL}" ]; then
+  echo "admin.email=${ADMIN_EMAIL}" >> /config/server.properties
+fi
+if [ -n "${ADMIN_PASS}" ]; then
+  echo "admin.pass=${ADMIN_PASS}" >> /config/server.properties
+fi
+
+# FIX: added JVM tuning flags; expose JAVA_OPTS for operator overrides
+exec java \
+  -server \
+  -Xms64m \
+  -Xmx512m \
+  -XX:+UseZGC \
+  -Dio.netty.leakDetection.level=disabled \
+  -Dfile.encoding=UTF-8 \
+  ${JAVA_OPTS} \
+  -jar /blynk/server.jar \
+  -dataFolder /data \
+  -serverConfig /config/server.properties

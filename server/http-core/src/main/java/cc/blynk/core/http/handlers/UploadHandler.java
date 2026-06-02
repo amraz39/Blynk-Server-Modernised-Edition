@@ -50,6 +50,14 @@ public class UploadHandler extends SimpleChannelInboundHandler<HttpObject> {
     private static final Logger log = LogManager.getLogger(UploadHandler.class);
 
     private static final HttpDataFactory factory = new DefaultHttpDataFactory(true);
+
+    // FIX H-3: whitelist of permitted upload extensions.
+    // OTA firmware (.bin, .hex) and images only. Blocks .sh .jar .exe .php .war etc.
+    private static final java.util.Set<String> ALLOWED_EXTENSIONS = java.util.Set.of(
+            ".bin", ".hex", ".ino.d32",            // OTA firmware
+            ".jpg", ".jpeg", ".png", ".gif", ".webp" // images
+    );
+
     final String handlerUri;
     private InterfaceHttpPostRequestDecoder decoder;
     private final String staticFolderPath;
@@ -145,9 +153,18 @@ public class UploadHandler extends SimpleChannelInboundHandler<HttpObject> {
                         String uploadedFilename = diskFileUpload.getFilename();
                         String extension = "";
                         if (uploadedFilename.contains(".")) {
-                            extension = uploadedFilename.substring(uploadedFilename.lastIndexOf("."),
-                                    uploadedFilename.length());
+                            extension = uploadedFilename.substring(uploadedFilename.lastIndexOf("."))
+                                    .toLowerCase();
                         }
+
+                        // FIX H-3: reject files with disallowed extensions
+                        if (!ALLOWED_EXTENSIONS.contains(extension)) {
+                            log.warn("Upload rejected: file '{}' has disallowed extension '{}'",
+                                    uploadedFilename, extension);
+                            Files.deleteIfExists(tmpFile);
+                            return null;
+                        }
+
                         String finalName = tmpFile.getFileName().toString() + extension;
 
                         //this is just to make it work on team city.

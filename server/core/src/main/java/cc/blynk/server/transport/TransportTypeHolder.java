@@ -48,7 +48,7 @@ public class TransportTypeHolder implements Closeable {
 
     @Override
     public void close() {
-        System.out.println("Stopping Transport Holder...");
+        log.info("Stopping Transport Holder...");
         if (bossGroup != null) {
             bossGroup.shutdownGracefully();
         }

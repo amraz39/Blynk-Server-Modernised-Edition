@@ -110,7 +110,7 @@ public class MqttHardwareLoginHandler extends SimpleChannelInboundHandler<MqttCo
 
         ChannelPipeline pipeline = ctx.pipeline();
         HardwareStateHolder hardwareStateHolder = new HardwareStateHolder(user, tokenValue.dash, device);
-        pipeline.replace(this, "HHArdwareMqttHandler", new MqttHardwareHandler(holder, hardwareStateHolder));
+        pipeline.replace(this, "MqttHardwareHandler", new MqttHardwareHandler(holder, hardwareStateHolder));
 
         Session session = holder.sessionDao.getOrCreateSessionByUser(
                 hardwareStateHolder.userKey, ctx.channel().eventLoop());

@@ -1,5 +1,6 @@
 package cc.blynk.server.workers;
 
+import cc.blynk.server.core.BlockingIOProcessor;
 import cc.blynk.server.core.dao.FileManager;
 import cc.blynk.server.core.dao.UserDao;
 import cc.blynk.server.core.model.auth.User;
@@ -10,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.Closeable;
 import java.nio.file.Path;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
+import java.time.Instant;
 import java.util.ArrayList;
 
 /**
@@ -23,17 +27,20 @@ public class ProfileSaverWorker implements Runnable, Closeable {
 
     private static final Logger log = LogManager.getLogger(ProfileSaverWorker.class);
 
-    //1 min
     private final UserDao userDao;
     private final FileManager fileManager;
     private final DBManager dbManager;
+    // FIX M-7: archive (backup) is submitted to blocking I/O pool, not scheduler thread
+    private final BlockingIOProcessor blockingIOProcessor;
     private long lastStart;
     private long backupTs;
 
-    public ProfileSaverWorker(UserDao userDao, FileManager fileManager, DBManager dbManager) {
+    public ProfileSaverWorker(UserDao userDao, FileManager fileManager,
+                              DBManager dbManager, BlockingIOProcessor blockingIOProcessor) {
         this.userDao = userDao;
         this.fileManager = fileManager;
         this.dbManager = dbManager;
+        this.blockingIOProcessor = blockingIOProcessor;
         this.lastStart = System.currentTimeMillis();
         this.backupTs = 0;
     }
@@ -44,44 +51,44 @@ public class ProfileSaverWorker implements Runnable, Closeable {
             log.debug("Starting saving user db.");
 
             final long now = System.currentTimeMillis();
-
             ArrayList<User> users = saveModified();
-
             dbManager.saveUsers(users);
 
-            //backup only for local mode
+            // FIX M-7: daily backup used to block the scheduler thread for potentially
+            // thousands of file writes. Now submitted to blockingIOProcessor.
             if (dbManager.dbIsNotEnabled() && users.size() > 0) {
-                archiveUser(now);
+                if (now - backupTs > 86_400_000) {
+                    backupTs = now;
+                    blockingIOProcessor.execute(() -> archiveUsers(now));
+                }
             }
 
             lastStart = now;
-
             log.debug("Saving user db finished. Modified {} users.", users.size());
         } catch (Throwable t) {
             log.error("Error saving users.", t);
         }
     }
 
-    private void archiveUser(long now) {
-        if (now - backupTs > 86_400_000) {
-            //it is time for backup, once per day.
-            log.info("Backup for user DB started...");
-            backupTs = now;
-            for (User user : userDao.users.values()) {
-                try {
-                    Path path = fileManager.generateBackupFileName(user.email, user.appName);
-                    JsonParser.writeUser(path.toFile(), user);
-                } catch (Exception e) {
-                    //ignore
-                }
+    private void archiveUsers(long ts) {
+        log.info("Backup for user DB started...");
+        // FIX M-1: use thread-safe DateTimeFormatter instead of SimpleDateFormat
+        String dateStr = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                .withZone(ZoneId.systemDefault())
+                .format(Instant.ofEpochMilli(ts));
+        for (User user : userDao.users.values()) {
+            try {
+                Path path = fileManager.generateBackupFileName(user.email, user.appName, dateStr);
+                JsonParser.writeUser(path.toFile(), user);
+            } catch (Exception e) {
+                log.warn("Error backing up user {}: {}", user.email, e.getMessage());
             }
-            log.info("Backup for user DB finished.");
         }
+        log.info("Backup for user DB finished.");
     }
 
     private ArrayList<User> saveModified() {
         var users = new ArrayList<User>();
-
         for (User user : userDao.getUsers().values()) {
             if (user.isUpdated(lastStart)) {
                 try {
@@ -92,7 +99,6 @@ public class ProfileSaverWorker implements Runnable, Closeable {
                 }
             }
         }
-
         return users;
     }
 
