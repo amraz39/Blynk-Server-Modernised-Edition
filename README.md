@@ -1,11 +1,14 @@
 # Blynk Community Server — Modernised Edition
 
-This is a hardened, modernised fork of the **Blynk Local Server** — an open-source IoT platform for connecting Arduino, ESP8266, ESP32, Raspberry Pi, and other microcontrollers to iOS and Android apps over the internet.
+This is a hardened, modernised fork of the legacy self-hosted **Blynk Local Server** — an open-source IoT platform for connecting Arduino, ESP8266, ESP32, Raspberry Pi, and other microcontrollers to iOS and Android apps over the internet.
 
-The original Blynk server project was **discontinued** by Blynk Inc. in favour of their commercial cloud platform. This fork updates it to run on modern Java and hardware, with significant security and performance improvements.
+The original Blynk server project was **discontinued** by Blynk Inc. in favour of their commercial cloud platform. This fork updates it to run on modern Java runtimes and hardware, with significant security, compatibility, stability, and performance improvements.
 
 > **Original project:** [https://github.com/blynkkk/blynk-server](https://github.com/blynkkk/blynk-server)
-> **License:** [GNU GPL](https://github.com/blynkkk/blynk-server/blob/master/license.txt)
+
+> **Original license:** [GNU GPL-3.0](https://github.com/blynkkk/blynk-server/blob/master/license.txt)
+
+This project is an unofficial community-maintained fork and is not affiliated with or endorsed by Blynk Inc.
 
 ---
 
