@@ -132,7 +132,10 @@ public class Holder {
                 .setUserAgent(null)
                 .setKeepAlive(true)
                 .setUseNativeTransport(Epoll.isAvailable())
-                .setUseOpenSsl(SslContextHolder.isOpenSslAvailable())
+                // FIX: force JDK SSL for async-http-client - BoringSSL causes
+                // ClassNotFoundException on AsyncSSLPrivateKeyMethod with
+                // async-http-client 2.12.4 + netty-tcnative 2.0.38 on aarch64
+                .setUseOpenSsl(false)
                 .build()
         );
 
@@ -202,7 +205,9 @@ public class Holder {
                 .setUserAgent(null)
                 .setKeepAlive(true)
                 .setUseNativeTransport(Epoll.isAvailable())
-                .setUseOpenSsl(SslContextHolder.isOpenSslAvailable())
+                // FIX: force JDK SSL - BoringSSL causes ClassNotFoundException on
+                // AsyncSSLPrivateKeyMethod with async-http-client 2.12.4 + netty-tcnative 2.0.38
+                .setUseOpenSsl(false)
                 .build()
         );
 

@@ -140,7 +140,10 @@ public class SslContextHolder {
     }
 
     private static SslProvider fetchSslProvider() {
-        return isOpenSslAvailable() ? SslProvider.OPENSSL : SslProvider.JDK;
+        // FIX: BoringSSL (netty-tcnative 2.0.38) on aarch64 with Netty 4.1.68 crashes with
+        // ClassNotFoundException: AsyncSSLPrivateKeyMethod at startup.
+        // Force JDK SSL unconditionally until netty-tcnative is upgraded to 2.0.61+
+        return SslProvider.JDK;
     }
 
     public static SslContext build(SslProvider sslProvider) throws CertificateException, SSLException {
