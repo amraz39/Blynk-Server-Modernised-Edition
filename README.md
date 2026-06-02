@@ -128,7 +128,7 @@ The original Blynk server project was **discontinued** by Blynk Inc. in favour o
 mvn clean package "-DskipTests" "-Dcheckstyle.skip=true"
 ```
 
-**For Raspberry Pi 5 / ARM64 (includes aarch64 native libraries):**
+**For Raspberry Pi 5 / ARM64 (includes aarch64 native libraries: native epoll, JDK SSL provider):**
 ```bash
 mvn clean package "-DskipTests" "-Dcheckstyle.skip=true" "-Depoll.os=linux-aarch_64"
 ```
