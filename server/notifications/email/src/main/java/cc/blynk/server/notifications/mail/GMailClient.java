@@ -53,16 +53,16 @@ public class GMailClient implements MailClient {
         log.info("Initializing Gmail SMTP transport. Username: {}. Host: {}:{}",
                 username, mailProperties.getSMTPHost(), mailProperties.getSMTPort());
 
-        // FIX: warn early if credentials look unconfigured — gives a clear message
+        // FIX: warn early if credentials look unconfigured - gives a clear message
         // instead of a cryptic "network unavailable" error from the JVM SSL stack
         if (username == null || username.isEmpty() || username.equals("YOUR_GMAIL_ADDRESS@gmail.com")) {
-            log.error("⚠ mail.smtp.username is not configured in mail.properties! "
+            log.error("WARNING: mail.smtp.username is not configured in mail.properties! "
                     + "Email sending will fail. Edit mail.properties and set your Gmail address "
                     + "and a Gmail App Password (not your account password). "
                     + "Generate an App Password at: https://myaccount.google.com/apppasswords");
         }
         if (password == null || password.isEmpty() || password.equals("YOUR_16_CHAR_APP_PASSWORD")) {
-            log.error("⚠ mail.smtp.password is not configured in mail.properties! "
+            log.error("WARNING: mail.smtp.password is not configured in mail.properties! "
                     + "Email sending will fail. Use a Gmail App Password, NOT your Gmail account password. "
                     + "Google disabled plain-password login in 2022. "
                     + "Generate at: https://myaccount.google.com/apppasswords");
@@ -159,7 +159,8 @@ public class GMailClient implements MailClient {
             log.trace("Mail to {} was sent.", to);
         } catch (MessagingException e) {
             String cause = e.getMessage();
-            if (cause != null && (cause.contains("535") || cause.contains("Username and Password not accepted")
+            if (cause != null && (cause.contains("535")
+                    || cause.contains("Username and Password not accepted")
                     || cause.contains("Authentication"))) {
                 log.error("Gmail authentication failed sending to {}. "
                         + "Make sure you are using a Gmail App Password "
@@ -168,7 +169,8 @@ public class GMailClient implements MailClient {
                         + "Generate an App Password at: https://myaccount.google.com/apppasswords. "
                         + "Raw error: {}", to, cause);
             } else if (cause != null && (cause.contains("SSL") || cause.contains("TLS")
-                    || cause.contains("handshake") || cause.contains("PKIX"))) {
+                    || cause.contains("handshake")
+                    || cause.contains("PKIX"))) {
                 log.error("SSL/TLS error sending email to {}. "
                         + "Ensure mail.smtp.ssl.trust=smtp.gmail.com and "
                         + "mail.smtp.ssl.protocols=TLSv1.2 TLSv1.3 are set in mail.properties. "

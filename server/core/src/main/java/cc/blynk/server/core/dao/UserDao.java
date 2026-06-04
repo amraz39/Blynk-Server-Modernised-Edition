@@ -97,7 +97,7 @@ public class UserDao {
         users.put(new UserKey(user), user);
     }
 
-    // REFACTOR: shared helper – avoids duplicated triple-nested loops across all stats methods.
+    // REFACTOR: shared helper - avoids duplicated triple-nested loops across all stats methods.
     // Uses Map.merge which correctly increments (no post-increment bug).
     private Map<String, Integer> countByDeviceField(
             java.util.function.Function<Device, String> fieldExtractor) {

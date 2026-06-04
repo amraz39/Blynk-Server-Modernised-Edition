@@ -31,28 +31,43 @@ public final class SerializationUtil {
 
     private final static Logger log = LogManager.getLogger(SerializationUtil.class);
 
-    // FIX C-5: whitelist of package prefixes permitted during deserialization
+    // FIX C-5: whitelist of package prefixes permitted during deserialization.
+    // Covers: all Blynk domain classes (cc.blynk.*), ConcurrentHashMap and its
+    // internal lock classes, HashMap, common primitives, and Java enums.
+    // This prevents RCE via gadget chains while allowing legitimate Blynk data.
     private static final Set<String> ALLOWED_PACKAGES = Set.of(
             "cc.blynk.",
+            // ConcurrentHashMap and its internal classes (segment locks etc.)
             "java.util.concurrent.ConcurrentHashMap",
             "java.util.concurrent.ConcurrentHashMap$",
-            // ConcurrentHashMap internally uses ReentrantLock for segment locking
             "java.util.concurrent.locks.ReentrantLock",
             "java.util.concurrent.locks.ReentrantLock$",
             "java.util.concurrent.locks.AbstractQueuedSynchronizer",
             "java.util.concurrent.locks.AbstractQueuedSynchronizer$",
             "java.util.concurrent.locks.AbstractOwnableSynchronizer",
+            // Standard collections
             "java.util.HashMap",
             "java.util.HashMap$",
+            "java.util.LinkedHashMap",
+            "java.util.LinkedHashMap$",
+            "java.util.ArrayList",
+            "java.util.LinkedList",
+            // Primitives and wrappers
             "java.lang.Number",
             "java.lang.Long",
             "java.lang.Integer",
             "java.lang.Double",
             "java.lang.Float",
+            "java.lang.Short",
+            "java.lang.Byte",
+            "java.lang.Boolean",
+            "java.lang.Character",
             "java.lang.String",
-            "java.lang.Enum",   // used internally by ConcurrentHashMap serialization
+            // Enum support - Java serializes enum values via java.lang.Enum
+            "java.lang.Enum",
             "java.lang.Object",
-            "[" // arrays
+            // Arrays
+            "["
     );
 
     private SerializationUtil() {
@@ -81,7 +96,7 @@ public final class SerializationUtil {
 
     private static Object deserializeObject(Path path) throws IOException, ClassNotFoundException {
         try (InputStream is = Files.newInputStream(path);
-             // FIX C-5: use filtering stream — blocks gadget-chain deserialization attacks
+             // FIX C-5: use filtering stream - blocks gadget-chain deserialization attacks
              ObjectInputStream objectinputstream = new FilteredObjectInputStream(is)) {
             return objectinputstream.readObject();
         }

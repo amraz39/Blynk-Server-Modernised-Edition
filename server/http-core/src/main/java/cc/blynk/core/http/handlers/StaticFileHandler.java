@@ -249,7 +249,7 @@ public class StaticFileHandler extends ChannelInboundHandlerAdapter {
                     return;
                 }
             } catch (Exception ignored) {
-                // Malformed If-Modified-Since header — serve the file normally
+                // Malformed If-Modified-Since header - serve the file normally
             }
         }
 

@@ -115,8 +115,10 @@ public class LoadBalancingIntegrationTest extends BaseTest {
 
         appClient1.reset();
 
-        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(holder.userDao, holder.fileManager, holder.dbManager, holder.blockingIOProcessor);
-        ProfileSaverWorker profileSaverWorker2 = new ProfileSaverWorker(holder2.userDao, holder2.fileManager, holder2.dbManager, holder2.blockingIOProcessor);
+        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(
+                holder.userDao, holder.fileManager, holder.dbManager, holder.blockingIOProcessor);
+        ProfileSaverWorker profileSaverWorker2 = new ProfileSaverWorker(
+                holder2.userDao, holder2.fileManager, holder2.dbManager, holder2.blockingIOProcessor);
 
         workflowForUser(appClient1, email, pass, appName);
         profileSaverWorker.run();
@@ -175,7 +177,8 @@ public class LoadBalancingIntegrationTest extends BaseTest {
 
         appClient1.reset();
 
-        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(holder.userDao, holder.fileManager, holder.dbManager, holder.blockingIOProcessor);
+        ProfileSaverWorker profileSaverWorker = new ProfileSaverWorker(
+                holder.userDao, holder.fileManager, holder.dbManager, holder.blockingIOProcessor);
 
         workflowForUser(appClient1, email, pass, appName);
         profileSaverWorker.run();

@@ -109,7 +109,8 @@ public class SslContextHolder {
             log.info("Generating own initial certificates...");
             try {
                 regenerate();
-                log.info("Success! The certificate for your domain {} has been generated!", props.getProperty("server.host"));
+                log.info("Success! The certificate for your domain {} has been generated!",
+                        props.getProperty("server.host"));
             } catch (Exception e) {
                 log.error("Error during certificate generation.");
                 log.error("Certificate generation error: {}", e.getMessage());

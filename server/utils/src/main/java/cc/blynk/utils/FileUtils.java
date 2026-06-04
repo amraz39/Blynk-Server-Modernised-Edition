@@ -209,7 +209,9 @@ public final class FileUtils {
      * major filesystems: letters, digits, @, ., -, _
      */
     public static String sanitizeForFilesystem(String email) {
-        if (email == null) return "_";
+        if (email == null) {
+            return "_";
+        }
         return email.replaceAll("[^a-zA-Z0-9@._\\-]", "_");
     }
 

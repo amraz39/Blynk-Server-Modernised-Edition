@@ -160,7 +160,8 @@ public class Holder {
         // FIX P-4: pool size now configurable; default Math.max(2, cores/2) instead of hardcoded 1
         int reportPoolSize = props.getIntProperty("report.scheduler.pool.size",
                 Math.max(2, Runtime.getRuntime().availableProcessors() / 2));
-        this.reportScheduler = new ReportScheduler(reportPoolSize, downloadUrl, mailWrapper, reportingDiskDao, userDao.users);
+        this.reportScheduler = new ReportScheduler(reportPoolSize, downloadUrl,
+                mailWrapper, reportingDiskDao, userDao.users);
 
         String contactEmail = serverProperties.getProperty("contact.email", mailProperties.getSMTPUsername());
         this.sslContextHolder = new SslContextHolder(props, contactEmail);
@@ -223,7 +224,8 @@ public class Holder {
         // FIX P-4: pool size now configurable; default Math.max(2, cores/2) instead of hardcoded 1
         int reportPoolSize = props.getIntProperty("report.scheduler.pool.size",
                 Math.max(2, Runtime.getRuntime().availableProcessors() / 2));
-        this.reportScheduler = new ReportScheduler(reportPoolSize, downloadUrl, mailWrapper, reportingDiskDao, userDao.users);
+        this.reportScheduler = new ReportScheduler(reportPoolSize, downloadUrl,
+                mailWrapper, reportingDiskDao, userDao.users);
 
         this.sslContextHolder = new SslContextHolder(props, "test@blynk.cc");
         this.tokensPool = new TokensPool(serverProperties.getReportingFolder());

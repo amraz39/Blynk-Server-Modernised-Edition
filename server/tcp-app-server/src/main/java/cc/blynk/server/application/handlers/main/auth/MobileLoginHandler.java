@@ -176,7 +176,9 @@ public class MobileLoginHandler extends SimpleChannelInboundHandler<LoginMessage
 
     // FIX H-2: constant-time comparison prevents timing-based password recovery attacks
     private static boolean safeEquals(String stored, String incoming) {
-        if (stored == null || incoming == null) return false;
+        if (stored == null || incoming == null) {
+            return false;
+        }
         return java.security.MessageDigest.isEqual(
                 stored.getBytes(java.nio.charset.StandardCharsets.UTF_8),
                 incoming.getBytes(java.nio.charset.StandardCharsets.UTF_8)

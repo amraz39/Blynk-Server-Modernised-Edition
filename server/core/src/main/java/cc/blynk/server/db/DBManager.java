@@ -121,7 +121,7 @@ public class DBManager implements Closeable {
         config.setMaximumPoolSize(poolSize);
 
         // FIX: was 0 (infinite lifetime), which prevents stale connection recycling.
-        // Set to 9.5 minutes — safely below PostgreSQL default idle_timeout of 10 min.
+        // Set to 9.5 minutes - safely below PostgreSQL default idle_timeout of 10 min.
         config.setMaxLifetime(570_000);
 
         // FIX: removed setConnectionTestQuery("SELECT 1"); HikariCP 3+ uses

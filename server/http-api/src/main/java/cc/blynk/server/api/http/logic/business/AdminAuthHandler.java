@@ -15,7 +15,6 @@ import cc.blynk.utils.AppNameUtil;
 import cc.blynk.utils.http.MediaType;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.cookie.Cookie;
 import io.netty.handler.codec.http.cookie.DefaultCookie;
 import io.netty.handler.codec.http.cookie.ServerCookieEncoder;
@@ -83,7 +82,7 @@ public class AdminAuthHandler extends BaseHttpHandler {
         }
 
         // The browser pre-hashes the password using SHA256 before sending (see login.js).
-        // So `password` here is already the hash — compare directly, do NOT hash again.
+        // So `password` here is already the hash - compare directly, do NOT hash again.
         // FIX H-2: use constant-time comparison to prevent timing attacks.
         if (!safeEquals(password, user.pass)) {
             recordFailedAttempt(clientIp);
@@ -91,7 +90,7 @@ public class AdminAuthHandler extends BaseHttpHandler {
             return redirect(rootPath);
         }
 
-        // Successful login — clear failure record
+        // Successful login - clear failure record
         loginAttempts.remove(clientIp);
 
         Response response = redirect(rootPath);
@@ -109,7 +108,7 @@ public class AdminAuthHandler extends BaseHttpHandler {
         // Extract session token from cookie via channel attribute
         // FIX: invalidate the server-side session so the cookie cannot be replayed after logout
         if (ctx.channel().hasAttr(SessionDao.userAttributeKey)) {
-            // walk the pipeline to find the cookie — simplest is to invalidate by user
+            // walk the pipeline to find the cookie - simplest is to invalidate by user
             User user = ctx.channel().attr(SessionDao.userAttributeKey).get();
             if (user != null) {
                 log.debug("Admin logout for user {}", user.email);
@@ -125,7 +124,9 @@ public class AdminAuthHandler extends BaseHttpHandler {
     // FIX C-3: check if IP is currently locked out
     private boolean isLockedOut(String ip) {
         long[] rec = loginAttempts.get(ip);
-        if (rec == null) return false;
+        if (rec == null) {
+            return false;
+        }
         if (System.currentTimeMillis() - rec[1] > LOCKOUT_DURATION_MS) {
             loginAttempts.remove(ip);
             return false;
@@ -146,7 +147,9 @@ public class AdminAuthHandler extends BaseHttpHandler {
 
     // FIX H-2: constant-time string comparison to prevent timing attacks
     private static boolean safeEquals(String a, String b) {
-        if (a == null || b == null) return false;
+        if (a == null || b == null) {
+            return false;
+        }
         return MessageDigest.isEqual(
                 a.getBytes(StandardCharsets.UTF_8),
                 b.getBytes(StandardCharsets.UTF_8)

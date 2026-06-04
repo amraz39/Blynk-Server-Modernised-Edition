@@ -141,7 +141,8 @@ public class HistoryGraphUnusedPinDataCleanerWorker implements Runnable {
     private static void add(Set<String> doNotRemovePaths, Profile profile,
                             DashBoard dash, Superchart graph, int[] deviceIds) {
         for (GraphDataStream graphDataStream : graph.dataStreams) {
-            if (graphDataStream != null && graphDataStream.dataStream != null && graphDataStream.dataStream.isValid()) {
+            if (graphDataStream != null && graphDataStream.dataStream != null
+                    && graphDataStream.dataStream.isValid()) {
                 DataStream dataStream = graphDataStream.dataStream;
 
                 int[] resultIds;
