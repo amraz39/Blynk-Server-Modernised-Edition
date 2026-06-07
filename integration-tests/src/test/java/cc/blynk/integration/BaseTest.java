@@ -38,10 +38,6 @@ public abstract class BaseTest extends CounterBase {
     public void initHolderAndDataFolder() throws Exception {
         properties.setProperty("data.folder", getDataFolder());
 
-        // Disable SSL-specific ports only, not the main HTTPS port
-        properties.setProperty("https.server.port", "0");
-        properties.setProperty("websocket.ssl.port", "0");
-
         this.holder = createDefaultHolder(properties, "no-db.properties");
 
     }
@@ -87,8 +83,7 @@ public abstract class BaseTest extends CounterBase {
     }
 
     public ClientPair initAppAndHardPair() throws Exception {
-        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
-        return TestUtil.initAppAndHardPair("localhost", appPort, tcpHardPort, getUserName(), "1", "user_profile_json.txt", properties, 10000);
+        return TestUtil.initAppAndHardPair("localhost", properties.getHttpsPort(), tcpHardPort, getUserName(), "1", "user_profile_json.txt", properties, 10000);
     }
 
     //for tests only
@@ -107,8 +102,7 @@ public abstract class BaseTest extends CounterBase {
     }
 
     public ClientPair initAppAndHardPair(String jsonProfile) throws Exception {
-        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
-        return TestUtil.initAppAndHardPair("localhost", appPort, tcpHardPort, getUserName(), "1", jsonProfile, properties, 10000);
+        return TestUtil.initAppAndHardPair("localhost", properties.getHttpsPort(), tcpHardPort, getUserName(), "1", jsonProfile, properties, 10000);
     }
 
     public ClientPair initAppAndHardPair(int tcpAppPort, int tcpHartPort, ServerProperties properties) throws Exception {
@@ -116,8 +110,7 @@ public abstract class BaseTest extends CounterBase {
     }
 
     public ClientPair initAppAndHardPair(ServerProperties properties) throws Exception {
-        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
-        return TestUtil.initAppAndHardPair("localhost", appPort, properties.getHttpPort(), getUserName(), "1", "user_profile_json.txt", properties, 10000);
+        return TestUtil.initAppAndHardPair("localhost", properties.getHttpsPort(), properties.getHttpPort(), getUserName(), "1", "user_profile_json.txt", properties, 10000);
     }
 
 }

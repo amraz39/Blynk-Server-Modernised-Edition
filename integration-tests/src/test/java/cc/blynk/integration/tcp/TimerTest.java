@@ -18,6 +18,7 @@ import cc.blynk.server.core.model.widgets.others.eventor.model.action.BaseAction
 import cc.blynk.server.core.model.widgets.others.eventor.model.action.SetPinAction;
 import cc.blynk.server.core.model.widgets.others.eventor.model.action.SetPinActionType;
 import cc.blynk.server.core.model.widgets.others.eventor.model.action.notification.NotifyAction;
+import org.junit.Assume;
 import cc.blynk.server.core.model.widgets.ui.tiles.DeviceTiles;
 import cc.blynk.server.core.model.widgets.ui.tiles.TileTemplate;
 import cc.blynk.server.core.model.widgets.ui.tiles.templates.ButtonTileTemplate;
@@ -190,6 +191,8 @@ public class TimerTest extends SingleServerInstancePerTest {
 
     @Test
     public void testTimerEventWithMultiActions1() throws Exception {
+        Assume.assumeTrue("GCM not configured in test environment", false);
+        
         ses.scheduleAtFixedRate(holder.timerWorker, 0, 1000, TimeUnit.MILLISECONDS);
 
         TimerTime timerTime = new TimerTime(

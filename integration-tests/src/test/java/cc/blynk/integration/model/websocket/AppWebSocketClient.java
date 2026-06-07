@@ -51,13 +51,24 @@ public final class AppWebSocketClient extends BaseTestAppClient {
     public int msgId = 0;
 
     public AppWebSocketClient(String host, int port, String path) throws Exception {
+        this(host, port, path, true);
+    }
+
+    public AppWebSocketClient(String host, int port, String path, boolean isSSL) throws Exception {
         super(host, port, new Random(), new ServerProperties(Collections.emptyMap()));
 
-        URI uri = new URI("wss://" + host + ":" + port + path);
-        this.sslCtx = SslContextBuilder.forClient()
-                .sslProvider(SslProvider.JDK)
-                .trustManager(InsecureTrustManagerFactory.INSTANCE)
-                .build();
+        String scheme = isSSL ? "wss://" : "ws://";
+        URI uri = new URI(scheme + host + ":" + port + path);
+
+        if (isSSL) {
+            this.sslCtx = SslContextBuilder.forClient()
+                    .sslProvider(SslProvider.JDK)
+                    .trustManager(InsecureTrustManagerFactory.INSTANCE)
+                    .build();
+        } else {
+            this.sslCtx = null;
+        }
+
         this.appHandler = new AppWebSocketClientHandler(
                 WebSocketClientHandshakerFactory.newHandshaker(
                         uri, WebSocketVersion.V13, null, false, new DefaultHttpHeaders()));

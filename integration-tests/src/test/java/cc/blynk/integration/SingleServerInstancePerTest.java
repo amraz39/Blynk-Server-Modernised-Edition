@@ -33,9 +33,6 @@ public abstract class SingleServerInstancePerTest extends CounterBase {
     public static void init() throws Exception {
         properties = new ServerProperties(Collections.emptyMap(), "no_certs.properties");
         properties.setProperty("data.folder", TestUtil.getDataFolder());
-        // Disable SSL-specific ports only, not the main HTTPS port
-        properties.setProperty("https.server.port", "0");
-        properties.setProperty("websocket.ssl.port", "0");
         holder = createDefaultHolder(properties, "no-db.properties");
         hardwareServer = new HardwareAndHttpAPIServer(holder).start();
         appServer = new MobileAndHttpsServer(holder).start();
@@ -63,9 +60,8 @@ public abstract class SingleServerInstancePerTest extends CounterBase {
     }
 
     public ClientPair initAppAndHardPair() throws Exception {
-        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
         return TestUtil.initAppAndHardPair("localhost",
-                appPort, properties.getHttpPort(),
+                properties.getHttpsPort(), properties.getHttpPort(),
                 getUserName(), "1", changeProfileTo(), properties, 10000);
     }
 

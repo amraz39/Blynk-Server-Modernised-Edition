@@ -31,7 +31,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -70,29 +72,56 @@ public class HttpsAdminServerTest extends BaseTest {
     private User admin;
     private ClientPair clientPair;
 
+    @BeforeClass
+    public static void checkSSL() {
+        // Admin endpoints are only available over HTTPS
+        // This will be checked in @Before
+    }
 
     @After
     public void shutdown() {
-        httpAdminServer.close();
-        httpServer.close();
-        clientPair.stop();
+        if (httpAdminServer != null) {
+            httpAdminServer.close();
+        }
+        if (httpServer != null) {
+            httpServer.close();
+        }
+        if (clientPair != null) {
+            clientPair.stop();
+        }
     }
 
     @Before
     public void init() throws Exception {
+        Assume.assumeTrue("Admin endpoints are only available over HTTPS", holder.sslContextHolder.sslCtx != null);
+        
         this.httpAdminServer = new MobileAndHttpsServer(holder).start();
 
-        httpsAdminServerUrl = String.format("https://localhost:%s/admin", properties.getHttpsPort());
+        boolean sslEnabled = holder.sslContextHolder.sslCtx != null;
+        if (!sslEnabled) {
+            // Admin endpoints are only available over HTTPS
+            return;
+        }
+
+        String protocol = sslEnabled ? "https" : "http";
+        int port = sslEnabled ? properties.getHttpsPort() : properties.getHttpPort();
+        httpsAdminServerUrl = String.format("%s://localhost:%s/admin", protocol, port);
         httpServerUrl = String.format("http://localhost:%s/", properties.getHttpPort());
 
-        SSLContext sslcontext = TestUtil.initUnsecuredSSLContext();
+        if (sslEnabled) {
+            SSLContext sslcontext = TestUtil.initUnsecuredSSLContext();
 
-        // Allow TLSv1 protocol only
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new MyHostVerifier());
-        this.httpclient = HttpClients.custom()
-                .setSSLSocketFactory(sslsf)
-                .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
-                .build();
+            // Allow TLSv1 protocol only
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new MyHostVerifier());
+            this.httpclient = HttpClients.custom()
+                    .setSSLSocketFactory(sslsf)
+                    .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
+                    .build();
+        } else {
+            this.httpclient = HttpClients.custom()
+                    .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
+                    .build();
+        }
 
         httpServer = new HardwareAndHttpAPIServer(holder).start();
 

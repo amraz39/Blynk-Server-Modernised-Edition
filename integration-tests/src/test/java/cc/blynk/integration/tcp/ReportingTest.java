@@ -8,6 +8,7 @@ import cc.blynk.server.core.model.device.BoardType;
 import cc.blynk.server.core.model.device.Device;
 import cc.blynk.server.core.model.enums.PinType;
 import cc.blynk.server.core.model.serialization.JsonParser;
+import org.junit.Assume;
 import cc.blynk.server.core.model.widgets.outputs.graph.GraphGranularityType;
 import cc.blynk.server.core.model.widgets.ui.reporting.Format;
 import cc.blynk.server.core.model.widgets.ui.reporting.Report;
@@ -569,7 +570,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily Report is ready"),
                 eq(downloadUrl),
@@ -654,7 +655,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -725,7 +726,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -806,7 +807,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -895,7 +896,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -991,7 +992,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -1085,7 +1086,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -1177,7 +1178,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -1277,7 +1278,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -1370,7 +1371,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -1463,7 +1464,7 @@ public class ReportingTest extends BaseTest {
 
         String date = LocalDate.now(report.tzName).toString();
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
-        String downloadUrl = "http://127.0.0.1:18080/" + filename;
+        String downloadUrl = "http://localhost:18080/" + filename;
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
                 eq(downloadUrl),
@@ -1543,7 +1544,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 any());
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());
@@ -1624,7 +1625,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your one time OneTime Report is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 eq("Report name: OneTime Report<br>Period: One time"));
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());
@@ -1708,7 +1709,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your one time OneTime Report is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 eq("Report name: OneTime Report<br>Period: One time"));
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());
@@ -1787,7 +1788,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com,test2@gmail.com"),
                 eq("Your one time OneTime Report is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 eq("Report name: OneTime Report<br>Period: One time"));
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());
@@ -1875,7 +1876,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your one time OneTime Report is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 eq("Report name: OneTime Report<br>Period: One time"));
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());
@@ -2012,7 +2013,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your one time OneTime Report is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 eq("Report name: OneTime Report<br>Period: One time"));
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());
@@ -2309,7 +2310,7 @@ public class ReportingTest extends BaseTest {
         String filename = getUserName() + "_Blynk_" + report.id + "_" + date + ".zip";
         verify(holder.mailWrapper, timeout(3000)).sendReportEmail(eq("test@gmail.com"),
                 eq("Your daily DailyReport is ready"),
-                eq("http://127.0.0.1:18080/" + filename),
+                eq("http://localhost:18080/" + filename),
                 any());
         sleep(200);
         assertEquals(1, holder.reportScheduler.getCompletedTaskCount());

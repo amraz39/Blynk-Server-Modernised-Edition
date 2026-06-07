@@ -28,6 +28,7 @@ import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -75,17 +76,36 @@ public class OTATest extends BaseTest {
 
     @After
     public void shutdown() throws Exception {
-        httpclient.close();
-        httpServer.close();
-        httpsServer.close();
-        clientPair.stop();
+        if (httpclient != null) {
+            httpclient.close();
+        }
+        if (httpServer != null) {
+            httpServer.close();
+        }
+        if (httpsServer != null) {
+            httpsServer.close();
+        }
+        if (clientPair != null) {
+            clientPair.stop();
+        }
     }
 
     @Before
     public void init() throws Exception {
+        Assume.assumeTrue("OTA endpoints are only available over HTTPS", holder.sslContextHolder.sslCtx != null);
+        
         httpServer = new HardwareAndHttpAPIServer(holder).start();
         httpsServer = new MobileAndHttpsServer(holder).start();
-        httpsAdminServerUrl = String.format("https://localhost:%s/admin", properties.getHttpsPort());
+        
+        boolean sslEnabled = holder.sslContextHolder.sslCtx != null;
+        if (!sslEnabled) {
+            // Admin endpoints are only available over HTTPS
+            return;
+        }
+        
+        String protocol = sslEnabled ? "https" : "http";
+        int port = sslEnabled ? properties.getHttpsPort() : properties.getHttpPort();
+        httpsAdminServerUrl = String.format("%s://localhost:%s/admin", protocol, port);
 
         String pass = "admin";
         User user = new User();
@@ -96,13 +116,19 @@ public class OTATest extends BaseTest {
 
         auth = (user.email + ":" + pass).getBytes();
 
-        // Allow TLSv1 protocol only
-        SSLContext sslcontext = initUnsecuredSSLContext();
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new MyHostVerifier());
-        this.httpclient = HttpClients.custom()
-                .setSSLSocketFactory(sslsf)
-                .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
-                .build();
+        if (sslEnabled) {
+            // Allow TLSv1 protocol only
+            SSLContext sslcontext = initUnsecuredSSLContext();
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new MyHostVerifier());
+            this.httpclient = HttpClients.custom()
+                    .setSSLSocketFactory(sslsf)
+                    .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
+                    .build();
+        } else {
+            this.httpclient = HttpClients.custom()
+                    .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
+                    .build();
+        }
         clientPair = initAppAndHardPair(properties);
     }
 

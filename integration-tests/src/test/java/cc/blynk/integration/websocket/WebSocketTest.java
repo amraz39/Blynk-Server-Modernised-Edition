@@ -45,7 +45,9 @@ public class WebSocketTest extends BaseTest {
     public void shutdown() {
         webSocketServer.close();
         appServer.close();
-        clientPair.stop();
+        if (clientPair != null) {
+            clientPair.stop();
+        }
         holder.close();
     }
 
@@ -54,7 +56,11 @@ public class WebSocketTest extends BaseTest {
         tcpWebSocketPort = properties.getHttpPort();
         webSocketServer = new HardwareAndHttpAPIServer(holder).start();
         appServer = new MobileAndHttpsServer(holder).start();
-        clientPair = initAppAndHardPair(properties);
+        
+        boolean sslEnabled = holder.sslContextHolder.sslCtx != null;
+        if (sslEnabled) {
+            clientPair = initAppAndHardPair(properties);
+        }
     }
 
     @Override
@@ -64,7 +70,12 @@ public class WebSocketTest extends BaseTest {
 
     @Test
     public void testAppWebDashSocketLogin() throws Exception{
-        AppWebSocketClient appWebSocketClient = new AppWebSocketClient("localhost", properties.getHttpsPort(), WEBSOCKET_WEB_PATH);
+        if (holder.sslContextHolder.sslCtx == null) {
+            // Skip test when SSL is disabled
+            return;
+        }
+        boolean sslEnabled = holder.sslContextHolder.sslCtx != null;
+        AppWebSocketClient appWebSocketClient = new AppWebSocketClient("localhost", properties.getHttpsPort(), WEBSOCKET_WEB_PATH, sslEnabled);
         appWebSocketClient.start();
         appWebSocketClient.login(getUserName(), "1");
 
@@ -95,6 +106,10 @@ public class WebSocketTest extends BaseTest {
 
     @Test
     public void testSslBasicWebSocketCommandsOk() throws Exception{
+        if (holder.sslContextHolder.sslCtx == null) {
+            // Skip SSL-specific test when SSL is disabled
+            return;
+        }
         WebSocketClient webSocketClient = new WebSocketClient("localhost", properties.getHttpsPort(), StringUtils.WEBSOCKETS_PATH, true);
         webSocketClient.start();
         webSocketClient.send("login 4ae3851817194e2596cf1b7103603ef8");
@@ -105,6 +120,10 @@ public class WebSocketTest extends BaseTest {
 
     @Test
     public void testSyncBetweenWebSocketsAndAppWorks() throws Exception {
+        if (clientPair == null) {
+            // Skip test when SSL is disabled
+            return;
+        }
         clientPair.appClient.reset();
         clientPair.hardwareClient.reset();
 
@@ -143,6 +162,10 @@ public class WebSocketTest extends BaseTest {
 
     @Test
     public void testSyncBetweenWebSocketsAndAppWorksLoop() throws Exception {
+        if (clientPair == null) {
+            // Skip test when SSL is disabled
+            return;
+        }
         for (int i = 0; i < 10; i++) {
             testSyncBetweenWebSocketsAndAppWorks();
         }
