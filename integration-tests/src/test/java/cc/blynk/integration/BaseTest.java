@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.zip.InflaterInputStream;
@@ -34,9 +35,15 @@ public abstract class BaseTest extends CounterBase {
     public Holder holder;
 
     @Before
-    public void initHolderAndDataFolder() {
+    public void initHolderAndDataFolder() throws Exception {
         properties.setProperty("data.folder", getDataFolder());
+
+        properties.setProperty("https.port", "0");
+        properties.setProperty("https.server.port", "0");
+        properties.setProperty("websocket.ssl.port", "0");
+
         this.holder = createDefaultHolder(properties, "no-db.properties");
+
     }
 
     @BeforeClass
@@ -50,17 +57,33 @@ public abstract class BaseTest extends CounterBase {
         holder.close();
     }
 
+    // public static String getRelativeDataFolder(String path) {
+    //     URL resource = BaseTest.class.getResource(path);
+    //     URI uri = null;
+    //     try {
+    //         uri = resource.toURI();
+    //     } catch (Exception e) {
+    //         //ignoring. that's fine.
+    //     }
+    //     String resourcesPath = Paths.get(uri).toAbsolutePath().toString();
+    //     System.out.println("Resource path : " + resourcesPath);
+    //     return resourcesPath;
+    // }
+
     public static String getRelativeDataFolder(String path) {
         URL resource = BaseTest.class.getResource(path);
-        URI uri = null;
-        try {
-            uri = resource.toURI();
-        } catch (Exception e) {
-            //ignoring. that's fine.
+
+        if (resource == null) {
+            throw new RuntimeException("Resource not found: " + path);
         }
-        String resourcesPath = Paths.get(uri).toAbsolutePath().toString();
-        System.out.println("Resource path : " + resourcesPath);
-        return resourcesPath;
+
+        try {
+            return Paths.get(resource.toURI())
+                    .toAbsolutePath()
+                    .toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static ClientPair initAppAndHardPair() throws Exception {

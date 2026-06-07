@@ -5,6 +5,7 @@ import cc.blynk.integration.model.tcp.ClientPair;
 import cc.blynk.integration.model.tcp.TestAppClient;
 import cc.blynk.integration.model.tcp.TestHardClient;
 import cc.blynk.server.Holder;
+import cc.blynk.server.SslContextHolder;
 import cc.blynk.server.core.BlockingIOProcessor;
 import cc.blynk.server.core.model.DashBoard;
 import cc.blynk.server.core.model.DataStream;
@@ -42,6 +43,7 @@ import java.nio.file.Files;
 import java.nio.file.attribute.FileAttribute;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -70,6 +72,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 public final class TestUtil {
 
@@ -365,4 +371,23 @@ public final class TestUtil {
                         serverProperties.getIntProperty("notifications.queue.limit", 100)
                 ), dbFileName);
     }
+
+    public static void replaceSslContextHolder(Holder holder) {
+        try {
+            Field field = Holder.class.getDeclaredField("sslContextHolder");
+            field.setAccessible(true);
+
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+            modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+
+            SslContextHolder mockHolder = mock(SslContextHolder.class);
+
+            field.set(holder, mockHolder);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
 }

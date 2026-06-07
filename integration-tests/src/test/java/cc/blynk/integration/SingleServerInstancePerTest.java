@@ -11,6 +11,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 
 import static cc.blynk.integration.TestUtil.createDefaultHolder;
@@ -31,6 +33,9 @@ public abstract class SingleServerInstancePerTest extends CounterBase {
     public static void init() throws Exception {
         properties = new ServerProperties(Collections.emptyMap());
         properties.setProperty("data.folder", TestUtil.getDataFolder());
+        properties.setProperty("https.port", "0");
+        properties.setProperty("https.server.port", "0");
+        properties.setProperty("websocket.ssl.port", "0");
         holder = createDefaultHolder(properties, "no-db.properties");
         hardwareServer = new HardwareAndHttpAPIServer(holder).start();
         appServer = new MobileAndHttpsServer(holder).start();

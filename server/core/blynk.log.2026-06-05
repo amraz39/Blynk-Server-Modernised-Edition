@@ -1,0 +1,1224 @@
+00:03:17.146 ERROR - Error during deep copy of profile. Reason : Failed to call `setAccess()` on Method 'label' (of class `cc.blynk.server.core.model.device.BoardType`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make java.lang.String cc.blynk.server.core.model.device.BoardType.label() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.device" to module com.fasterxml.jackson.databind
+ at [Source: UNKNOWN; byte offset: #UNKNOWN]
+00:03:17.147 DEBUG - com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Failed to call `setAccess()` on Method 'label' (of class `cc.blynk.server.core.model.device.BoardType`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make java.lang.String cc.blynk.server.core.model.device.BoardType.label() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.device" to module com.fasterxml.jackson.databind
+ at [Source: UNKNOWN; byte offset: #UNKNOWN]
+00:03:17.152 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithNilValue(DataStreamStorageSerializationTest.java:182)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.170 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithSingleValue(DataStreamStorageSerializationTest.java:121)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.171 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeSingleValue(DataStreamStorageSerializationTest.java:84)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.224 INFO  - Using data dir '123'
+00:03:17.235 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithMultipleValuesAndLimit(DataStreamStorageSerializationTest.java:164)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.237 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeSingleEmptyValue(DataStreamStorageSerializationTest.java:64)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.238 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithMultipleValues(DataStreamStorageSerializationTest.java:140)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.240 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueEmpty(DataStreamStorageSerializationTest.java:103)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+00:03:17.327 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+00:03:17.334 INFO  - Separate DB storage disabled.
+00:03:17.338 INFO  - Separate DB storage disabled.
+00:03:17.339 INFO  - Separate DB storage disabled.
+00:03:17.340 INFO  - Separate DB storage disabled.
+00:03:17.342 INFO  - Separate DB storage disabled.
+00:03:17.343 INFO  - Separate DB storage disabled.
+00:03:17.356 INFO  - Adding token for dima@mail.us user to the pool
+00:03:17.385 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+00:03:17.392 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+00:03:17.398 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+00:03:17.401 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+00:03:17.406 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+07:40:25.603 ERROR - Error during deep copy of profile. Reason : Failed to call `setAccess()` on Method 'label' (of class `cc.blynk.server.core.model.device.BoardType`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make java.lang.String cc.blynk.server.core.model.device.BoardType.label() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.device" to module com.fasterxml.jackson.databind
+ at [Source: UNKNOWN; byte offset: #UNKNOWN]
+07:40:25.605 DEBUG - com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Failed to call `setAccess()` on Method 'label' (of class `cc.blynk.server.core.model.device.BoardType`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make java.lang.String cc.blynk.server.core.model.device.BoardType.label() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.device" to module com.fasterxml.jackson.databind
+ at [Source: UNKNOWN; byte offset: #UNKNOWN]
+07:40:25.610 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithNilValue(DataStreamStorageSerializationTest.java:182)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.623 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithSingleValue(DataStreamStorageSerializationTest.java:121)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.624 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeSingleValue(DataStreamStorageSerializationTest.java:84)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.627 INFO  - Using data dir '123'
+07:40:25.636 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithMultipleValuesAndLimit(DataStreamStorageSerializationTest.java:164)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.637 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeSingleEmptyValue(DataStreamStorageSerializationTest.java:64)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.644 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithMultipleValues(DataStreamStorageSerializationTest.java:140)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.646 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueEmpty(DataStreamStorageSerializationTest.java:103)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+07:40:25.740 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+07:40:25.745 INFO  - Separate DB storage disabled.
+07:40:25.749 INFO  - Separate DB storage disabled.
+07:40:25.750 INFO  - Separate DB storage disabled.
+07:40:25.750 INFO  - Separate DB storage disabled.
+07:40:25.753 INFO  - Separate DB storage disabled.
+07:40:25.755 INFO  - Separate DB storage disabled.
+07:40:25.768 INFO  - Adding token for dima@mail.us user to the pool
+07:40:25.795 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+07:40:25.801 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+07:40:25.807 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+07:40:25.810 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+07:40:25.815 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:11:14.672 ERROR - Error during deep copy of profile. Reason : Failed to call `setAccess()` on Method 'label' (of class `cc.blynk.server.core.model.device.BoardType`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make java.lang.String cc.blynk.server.core.model.device.BoardType.label() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.device" to module com.fasterxml.jackson.databind
+ at [Source: UNKNOWN; byte offset: #UNKNOWN]
+08:11:14.674 DEBUG - com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Failed to call `setAccess()` on Method 'label' (of class `cc.blynk.server.core.model.device.BoardType`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make java.lang.String cc.blynk.server.core.model.device.BoardType.label() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.device" to module com.fasterxml.jackson.databind
+ at [Source: UNKNOWN; byte offset: #UNKNOWN]
+08:11:14.679 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithNilValue(DataStreamStorageSerializationTest.java:182)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.690 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithSingleValue(DataStreamStorageSerializationTest.java:121)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.692 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeSingleValue(DataStreamStorageSerializationTest.java:84)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.696 INFO  - Using data dir '123'
+08:11:14.704 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithMultipleValuesAndLimit(DataStreamStorageSerializationTest.java:164)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.706 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeSingleEmptyValue(DataStreamStorageSerializationTest.java:64)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.707 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueWithMultipleValues(DataStreamStorageSerializationTest.java:140)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.708 ERROR - Error jsoning object.
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Invalid type definition for type `cc.blynk.server.core.model.auth.User`: Failed to construct BeanSerializer for [simple type, class cc.blynk.server.core.model.auth.User]: (java.lang.IllegalArgumentException) Failed to call `setAccess()` on Method 'id' (of class `cc.blynk.server.core.model.auth.User`) due to `java.lang.reflect.InaccessibleObjectException`, problem: Unable to make private java.lang.String cc.blynk.server.core.model.auth.User.id() accessible: module cc.blynk.core does not "opens cc.blynk.server.core.model.auth" to module com.fasterxml.jackson.databind
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:72)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.reportBadTypeDefinition(SerializerProvider.java:1331)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.constructBeanOrAddOnSerializer(BeanSerializerFactory.java:504)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.findBeanOrAddOnSerializer(BeanSerializerFactory.java:292)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory._createSerializer2(BeanSerializerFactory.java:237)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.BeanSerializerFactory.createSerializer(BeanSerializerFactory.java:171)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createUntypedSerializer(SerializerProvider.java:1554)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider._createAndCacheUntypedSerializer(SerializerProvider.java:1522)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findValueSerializer(SerializerProvider.java:628)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.SerializerProvider.findTypedValueSerializer(SerializerProvider.java:914)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:368)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1585)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind@2.20.2/com.fasterxml.jackson.databind.ObjectWriter.writeValueAsString(ObjectWriter.java:1140)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:166)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.serialization.JsonParser.toJson(JsonParser.java:98)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.auth.User.toString(User.java:171)
+	at cc.blynk.core@0.41.18-SNAPSHOT/cc.blynk.server.core.model.DataStreamStorageSerializationTest.testSerializeMultiValueEmpty(DataStreamStorageSerializationTest.java:103)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+08:11:14.798 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+08:11:14.815 INFO  - Adding token for dima@mail.us user to the pool
+08:11:14.844 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:11:14.851 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:11:14.857 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:11:14.860 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:11:14.865 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:33:58.585 INFO  - Using data dir '123'
+08:33:58.725 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+08:33:58.747 INFO  - Adding token for dima@mail.us user to the pool
+08:33:58.777 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:33:58.780 DEBUG - Starting reading user DB.
+08:33:58.783 DEBUG - Reading user DB finished.
+08:33:58.790 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:33:58.792 DEBUG - Starting reading user DB.
+08:33:58.793 DEBUG - Reading user DB finished.
+08:33:58.797 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:33:58.802 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:33:58.802 DEBUG - Starting reading user DB.
+08:33:58.803 DEBUG - Reading user DB finished.
+08:33:58.808 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:58:11.884 INFO  - Using data dir '123'
+08:58:12.017 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+08:58:12.034 INFO  - Adding token for dima@mail.us user to the pool
+08:58:12.061 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:58:12.064 DEBUG - Starting reading user DB.
+08:58:12.068 DEBUG - Reading user DB finished.
+08:58:12.074 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:58:12.075 DEBUG - Starting reading user DB.
+08:58:12.077 DEBUG - Reading user DB finished.
+08:58:12.081 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:58:12.085 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+08:58:12.086 DEBUG - Starting reading user DB.
+08:58:12.087 DEBUG - Reading user DB finished.
+08:58:12.091 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+15:53:50.790 INFO  - Using data dir '123'
+15:53:50.921 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+15:53:50.940 INFO  - Adding token for dima@mail.us user to the pool
+15:53:50.968 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+15:53:50.971 DEBUG - Starting reading user DB.
+15:53:50.975 DEBUG - Reading user DB finished.
+15:53:50.980 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+15:53:50.982 DEBUG - Starting reading user DB.
+15:53:50.983 DEBUG - Reading user DB finished.
+15:53:50.988 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+15:53:50.991 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+15:53:50.991 DEBUG - Starting reading user DB.
+15:53:50.993 DEBUG - Reading user DB finished.
+15:53:50.997 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:08:24.314 INFO  - Using data dir '123'
+16:08:24.438 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+16:08:24.457 INFO  - Adding token for dima@mail.us user to the pool
+16:08:24.485 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:08:24.488 DEBUG - Starting reading user DB.
+16:08:24.491 DEBUG - Reading user DB finished.
+16:08:24.497 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:08:24.499 DEBUG - Starting reading user DB.
+16:08:24.499 DEBUG - Reading user DB finished.
+16:08:24.503 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:08:24.506 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:08:24.507 DEBUG - Starting reading user DB.
+16:08:24.508 DEBUG - Reading user DB finished.
+16:08:24.513 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:09:03.939 INFO  - Using data dir '123'
+16:09:04.061 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+16:09:04.080 INFO  - Adding token for dima@mail.us user to the pool
+16:09:04.108 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:09:04.111 DEBUG - Starting reading user DB.
+16:09:04.115 DEBUG - Reading user DB finished.
+16:09:04.121 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:09:04.123 DEBUG - Starting reading user DB.
+16:09:04.123 DEBUG - Reading user DB finished.
+16:09:04.128 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:09:04.130 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+16:09:04.131 DEBUG - Starting reading user DB.
+16:09:04.131 DEBUG - Reading user DB finished.
+16:09:04.136 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:08:22.806 INFO  - Using data dir '123'
+17:08:22.935 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:08:22.953 INFO  - Adding token for dima@mail.us user to the pool
+17:08:22.991 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:08:22.995 DEBUG - Starting reading user DB.
+17:08:22.999 DEBUG - Reading user DB finished.
+17:08:23.004 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:08:23.006 DEBUG - Starting reading user DB.
+17:08:23.006 DEBUG - Reading user DB finished.
+17:08:23.010 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:08:23.014 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:08:23.015 DEBUG - Starting reading user DB.
+17:08:23.016 DEBUG - Reading user DB finished.
+17:08:23.020 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:14:31.141 INFO  - Using data dir '123'
+17:14:31.266 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:14:31.285 INFO  - Adding token for dima@mail.us user to the pool
+17:14:31.318 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:14:31.321 DEBUG - Starting reading user DB.
+17:14:31.324 DEBUG - Reading user DB finished.
+17:14:31.329 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:14:31.331 DEBUG - Starting reading user DB.
+17:14:31.332 DEBUG - Reading user DB finished.
+17:14:31.336 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:14:31.340 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:14:31.340 DEBUG - Starting reading user DB.
+17:14:31.341 DEBUG - Reading user DB finished.
+17:14:31.346 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:24:13.834 INFO  - Using data dir '123'
+17:24:13.979 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:24:14.000 INFO  - Adding token for dima@mail.us user to the pool
+17:24:14.041 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:24:14.044 DEBUG - Starting reading user DB.
+17:24:14.049 DEBUG - Reading user DB finished.
+17:24:14.055 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:24:14.056 DEBUG - Starting reading user DB.
+17:24:14.057 DEBUG - Reading user DB finished.
+17:24:14.062 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:24:14.064 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:24:14.065 DEBUG - Starting reading user DB.
+17:24:14.067 DEBUG - Reading user DB finished.
+17:24:14.071 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:39:37.606 INFO  - Using data dir '123'
+17:39:37.738 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:39:37.758 INFO  - Adding token for dima@mail.us user to the pool
+17:39:37.794 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:39:37.798 DEBUG - Starting reading user DB.
+17:39:37.801 DEBUG - Reading user DB finished.
+17:39:37.808 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:39:37.810 DEBUG - Starting reading user DB.
+17:39:37.810 DEBUG - Reading user DB finished.
+17:39:37.814 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:39:37.818 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:39:37.818 DEBUG - Starting reading user DB.
+17:39:37.819 DEBUG - Reading user DB finished.
+17:39:37.823 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:42:55.401 INFO  - Using data dir '123'
+17:42:55.528 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:42:55.545 INFO  - Adding token for dima@mail.us user to the pool
+17:42:55.582 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:42:55.586 DEBUG - Starting reading user DB.
+17:42:55.589 DEBUG - Reading user DB finished.
+17:42:55.594 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:42:55.596 DEBUG - Starting reading user DB.
+17:42:55.596 DEBUG - Reading user DB finished.
+17:42:55.601 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:42:55.605 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:42:55.605 DEBUG - Starting reading user DB.
+17:42:55.606 DEBUG - Reading user DB finished.
+17:42:55.611 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:52:07.756 INFO  - Using data dir '123'
+17:52:07.893 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:52:07.915 INFO  - Adding token for dima@mail.us user to the pool
+17:52:07.953 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:52:07.957 DEBUG - Starting reading user DB.
+17:52:07.961 DEBUG - Reading user DB finished.
+17:52:07.966 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:52:07.968 DEBUG - Starting reading user DB.
+17:52:07.968 DEBUG - Reading user DB finished.
+17:52:07.972 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:52:07.975 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:52:07.975 DEBUG - Starting reading user DB.
+17:52:07.977 DEBUG - Reading user DB finished.
+17:52:07.981 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:54:31.886 INFO  - Using data dir '123'
+17:54:32.019 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+17:54:32.038 INFO  - Adding token for dima@mail.us user to the pool
+17:54:32.078 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:54:32.082 DEBUG - Starting reading user DB.
+17:54:32.086 DEBUG - Reading user DB finished.
+17:54:32.092 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:54:32.093 DEBUG - Starting reading user DB.
+17:54:32.094 DEBUG - Reading user DB finished.
+17:54:32.097 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:54:32.101 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+17:54:32.102 DEBUG - Starting reading user DB.
+17:54:32.103 DEBUG - Reading user DB finished.
+17:54:32.108 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+18:03:21.052 INFO  - Using data dir '123'
+18:03:21.182 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+18:03:21.202 INFO  - Adding token for dima@mail.us user to the pool
+18:03:21.239 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+18:03:21.242 DEBUG - Starting reading user DB.
+18:03:21.245 DEBUG - Reading user DB finished.
+18:03:21.250 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+18:03:21.251 DEBUG - Starting reading user DB.
+18:03:21.251 DEBUG - Reading user DB finished.
+18:03:21.257 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+18:03:21.260 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+18:03:21.261 DEBUG - Starting reading user DB.
+18:03:21.261 DEBUG - Reading user DB finished.
+18:03:21.266 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:23:50.048 INFO  - Using data dir '123'
+23:23:50.173 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+23:23:50.193 INFO  - Adding token for dima@mail.us user to the pool
+23:23:50.228 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:23:50.231 DEBUG - Starting reading user DB.
+23:23:50.234 DEBUG - Reading user DB finished.
+23:23:50.240 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:23:50.241 DEBUG - Starting reading user DB.
+23:23:50.242 DEBUG - Reading user DB finished.
+23:23:50.245 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:23:50.248 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:23:50.249 DEBUG - Starting reading user DB.
+23:23:50.249 DEBUG - Reading user DB finished.
+23:23:50.255 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:36:40.495 INFO  - Using data dir '123'
+23:36:40.621 DEBUG - Removing v1 pin data for dashId 1, deviceId 0.
+23:36:40.642 INFO  - Adding token for dima@mail.us user to the pool
+23:36:40.677 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:36:40.680 DEBUG - Starting reading user DB.
+23:36:40.684 DEBUG - Reading user DB finished.
+23:36:40.690 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:36:40.692 DEBUG - Starting reading user DB.
+23:36:40.692 DEBUG - Reading user DB finished.
+23:36:40.696 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:36:40.700 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'
+23:36:40.701 DEBUG - Starting reading user DB.
+23:36:40.702 DEBUG - Reading user DB finished.
+23:36:40.706 INFO  - Using data dir 'C:\Users\PTuT\AppData\Local\Temp\blynk'

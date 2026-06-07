@@ -136,6 +136,31 @@ mvn clean package "-DskipTests" "-Dcheckstyle.skip=true"
 mvn clean package "-DskipTests" "-Dcheckstyle.skip=true" "-Depoll.os=linux-aarch_64"
 ```
 
+or:
+```bash
+mvn clean package "-Depoll.os=linux-aarch_64"
+```
+
+
+### Install
+
+**Standard build (all platforms):**
+```bash
+mvn clean install
+```
+
+**For Raspberry Pi 5 / ARM64 (includes aarch64 native libraries: native epoll, JDK SSL provider):**
+```bash
+mvn clean install "-Depoll.os=linux-aarch_64"
+```
+
+### Note
+
+When running `mvn clean install`, the built JAR will be installed to your local Maven repository (`~/.m2/repository/cc/blynk/server/launcher/0.41.18-SNAPSHOT/`) and can be used as a dependency in other projects.
+
+The integration-tests are disabled due to deep issues netween `Netty` and `Java-21`.
+
+
 The built JAR will be at:
 ```
 server/launcher/target/server-0.41.18-SNAPSHOT.jar

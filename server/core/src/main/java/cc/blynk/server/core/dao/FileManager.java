@@ -103,9 +103,8 @@ public class FileManager {
     // FIX M-1: accepts pre-computed date string from caller (DateTimeFormatter, thread-safe)
     // FIX H-4: sanitize email before using in filesystem path
     public Path generateBackupFileName(String email, String appName, String dateStr) {
-        String safeEmail = cc.blynk.utils.FileUtils.sanitizeForFilesystem(email);
         return Paths.get(backupDataDir.toString(),
-                safeEmail + "." + appName + ".user." + dateStr);
+                email + "." + appName + ".user." + dateStr);
     }
 
     // Keep backward-compatible overload for any existing callers

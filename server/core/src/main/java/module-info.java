@@ -49,12 +49,12 @@ module cc.blynk.core {
     requires cc.blynk.server.notifications.push;
     requires cc.blynk.server.notifications.sms;
     requires cc.blynk.server.notifications.twitter;
-    requires cc.blynk.server.acme;
-    requires cc.blynk.utils;
-    requires io.netty.transport.epoll;
+    requires transitive cc.blynk.server.acme;
+    requires transitive cc.blynk.utils;
+    //requires io.netty.transport.epoll;
     requires io.netty.common;
     requires io.netty.transport;
-    requires io.netty.handler;
+    requires transitive io.netty.handler;
     requires io.netty.buffer;
     requires io.netty.codec;
     requires io.netty.codec.http;
@@ -65,4 +65,16 @@ module cc.blynk.core {
     requires com.fasterxml.jackson.annotation;
     requires org.apache.logging.log4j;
     requires com.fasterxml.jackson.core;
+
+    opens cc.blynk.server.core.model.auth
+        to com.fasterxml.jackson.databind;
+
+    opens cc.blynk.server.core.model.device
+        to com.fasterxml.jackson.databind;
+
+    opens cc.blynk.server.core.model.widgets.ui.table
+        to com.fasterxml.jackson.databind;
+
+    opens cc.blynk.server.core.model.widgets.ui.reporting.source
+        to com.fasterxml.jackson.databind;
 }
