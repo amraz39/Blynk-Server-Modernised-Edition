@@ -17,7 +17,7 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>true</skipTests>
-                    <argLine>-Dio.netty.leakDetection.level=paranoid -Dblynk.webhook.allow.local.urls=true -Dblynk.ssl.use.openssl=true --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/sun.security.x509=ALL-UNNAMED --add-opens java.base/sun.security.util=ALL-UNNAMED --add-opens java.base/sun.security.provider=ALL-UNNAMED --add-opens java.base/sun.security.pkcs=ALL-UNNAMED</argLine>
+                    <argLine>-Dio.netty.leakDetection.level=paranoid -Dblynk.webhook.allow.local.urls=true -Dblynk.ssl.disable=true --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/sun.security.x509=ALL-UNNAMED --add-opens java.base/sun.security.util=ALL-UNNAMED --add-opens java.base/sun.security.provider=ALL-UNNAMED --add-opens java.base/sun.security.pkcs=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
         </plugins>

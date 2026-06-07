@@ -46,7 +46,7 @@ import java.util.Random;
 
 public final class AppWebSocketClient extends BaseTestAppClient {
 
-    private final SslContext sslCtx;
+    private SslContext sslCtx;
     private final AppWebSocketClientHandler appHandler;
     public int msgId = 0;
 
@@ -59,8 +59,8 @@ public final class AppWebSocketClient extends BaseTestAppClient {
                 .trustManager(InsecureTrustManagerFactory.INSTANCE)
                 .build();
         this.appHandler = new AppWebSocketClientHandler(
-                        WebSocketClientHandshakerFactory.newHandshaker(
-                                uri, WebSocketVersion.V13, null, false, new DefaultHttpHeaders()));
+                WebSocketClientHandshakerFactory.newHandshaker(
+                        uri, WebSocketVersion.V13, null, false, new DefaultHttpHeaders()));
     }
 
     private static WebSocketFrame produceWebSocketFrame(MessageBase msg) {

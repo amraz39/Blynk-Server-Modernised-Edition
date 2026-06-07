@@ -38,6 +38,27 @@ public class SslContextHolder {
     private final boolean onlyLatestTLS;
 
     SslContextHolder(ServerProperties props, String email) {
+        // For tests, allow SSL to be disabled via system property
+        if (Boolean.getBoolean("blynk.ssl.disable")) {
+            log.info("SSL disabled via system property blynk.ssl.disable=true");
+            this.contentHolder = new ContentHolder();
+            // Use a self-signed certificate for tests to allow HTTPS connections
+            try {
+                SelfSignedCertificate ssc = new SelfSignedCertificate();
+                this.sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey())
+                        .sslProvider(SslProvider.JDK)
+                        .build();
+            } catch (Exception e) {
+                log.error("Failed to create self-signed SSL context", e);
+                this.sslCtx = null;
+            }
+            this.acmeClient = null;
+            this.isNeedInitializeOnStart = false;
+            this.onlyLatestTLS = false;
+            this.isAutoGenerationEnabled = false;
+            return;
+        }
+
         this.contentHolder = new ContentHolder();
         this.onlyLatestTLS = props.getBoolProperty("latest.tls");
 

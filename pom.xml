@@ -206,12 +206,9 @@
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
 
-        <!-- Skip integration tests due to SSL certificate generation incompatibility with Java 21 -->
-        <skipITs>true</skipITs>
-
         <!-- dependencies -->
-        <netty.version>4.1.115.Final</netty.version>
-        <netty.boring.ssl.version>2.0.65.Final</netty.boring.ssl.version>
+        <netty.version>4.1.68.Final</netty.version>
+        <netty.boring.ssl.version>2.0.38.Final</netty.boring.ssl.version>
         <log4j2.version>2.25.1</log4j2.version>
         <jackson-databind.version>2.20.2</jackson-databind.version>
         <disruptor.version>3.4.2</disruptor.version>

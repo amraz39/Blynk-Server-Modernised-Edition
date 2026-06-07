@@ -33,7 +33,7 @@ public abstract class SingleServerInstancePerTest extends CounterBase {
     public static void init() throws Exception {
         properties = new ServerProperties(Collections.emptyMap());
         properties.setProperty("data.folder", TestUtil.getDataFolder());
-        properties.setProperty("https.port", "0");
+        // Disable SSL-specific ports only, not the main HTTPS port
         properties.setProperty("https.server.port", "0");
         properties.setProperty("websocket.ssl.port", "0");
         holder = createDefaultHolder(properties, "no-db.properties");
