@@ -78,8 +78,10 @@ public final class AppWebSocketClient extends BaseTestAppClient {
             @Override
             public void initChannel(SocketChannel ch) throws Exception {
                 ChannelPipeline p = ch.pipeline();
+                if (sslCtx != null) {
+                    p.addLast(sslCtx.newHandler(ch.alloc(), host, port));
+                }
                 p.addLast(
-                        sslCtx.newHandler(ch.alloc(), host, port),
                         new HttpClientCodec(),
                         new HttpObjectAggregator(8192),
                         appHandler,

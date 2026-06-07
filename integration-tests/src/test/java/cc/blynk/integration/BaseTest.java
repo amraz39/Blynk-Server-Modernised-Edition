@@ -48,7 +48,7 @@ public abstract class BaseTest extends CounterBase {
 
     @BeforeClass
     public static void initProps() {
-        properties = new ServerProperties(Collections.emptyMap());
+        properties = new ServerProperties(Collections.emptyMap(), "no_certs.properties");
         tcpHardPort = properties.getHttpPort();
     }
 
@@ -86,8 +86,9 @@ public abstract class BaseTest extends CounterBase {
         }
     }
 
-    public static ClientPair initAppAndHardPair() throws Exception {
-        return TestUtil.initAppAndHardPair("localhost", properties.getHttpsPort(), tcpHardPort, getUserName(), "1", "user_profile_json.txt", properties, 10000);
+    public ClientPair initAppAndHardPair() throws Exception {
+        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
+        return TestUtil.initAppAndHardPair("localhost", appPort, tcpHardPort, getUserName(), "1", "user_profile_json.txt", properties, 10000);
     }
 
     //for tests only
@@ -105,16 +106,18 @@ public abstract class BaseTest extends CounterBase {
         }
     }
 
-    public static ClientPair initAppAndHardPair(String jsonProfile) throws Exception {
-        return TestUtil.initAppAndHardPair("localhost", properties.getHttpsPort(), tcpHardPort, getUserName(), "1", jsonProfile, properties, 10000);
+    public ClientPair initAppAndHardPair(String jsonProfile) throws Exception {
+        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
+        return TestUtil.initAppAndHardPair("localhost", appPort, tcpHardPort, getUserName(), "1", jsonProfile, properties, 10000);
     }
 
-    public static ClientPair initAppAndHardPair(int tcpAppPort, int tcpHartPort, ServerProperties properties) throws Exception {
+    public ClientPair initAppAndHardPair(int tcpAppPort, int tcpHartPort, ServerProperties properties) throws Exception {
         return TestUtil.initAppAndHardPair("localhost", tcpAppPort, tcpHartPort, getUserName(), "1", "user_profile_json.txt", properties, 10000);
     }
 
-    public static ClientPair initAppAndHardPair(ServerProperties properties) throws Exception {
-        return TestUtil.initAppAndHardPair("localhost", properties.getHttpsPort(), properties.getHttpPort(), getUserName(), "1", "user_profile_json.txt", properties, 10000);
+    public ClientPair initAppAndHardPair(ServerProperties properties) throws Exception {
+        int appPort = holder.sslContextHolder.sslCtx != null ? properties.getHttpsPort() : properties.getHttpPort();
+        return TestUtil.initAppAndHardPair("localhost", appPort, properties.getHttpPort(), getUserName(), "1", "user_profile_json.txt", properties, 10000);
     }
 
 }

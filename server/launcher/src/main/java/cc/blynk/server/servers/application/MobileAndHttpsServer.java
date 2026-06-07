@@ -236,8 +236,11 @@ public class MobileAndHttpsServer extends BaseServer {
         channelInitializer = new ChannelInitializer<>() {
             @Override
             protected void initChannel(SocketChannel ch) {
+                if (holder.sslContextHolder.sslCtx != null) {
+                    ch.pipeline()
+                    .addLast(holder.sslContextHolder.sslCtx.newHandler(ch.alloc()));
+                }
                 ch.pipeline()
-                .addLast(holder.sslContextHolder.sslCtx.newHandler(ch.alloc()))
                 .addLast(new BaseHttpAndBlynkUnificationHandler() {
                     @Override
                     public ChannelPipeline buildHttpPipeline(ChannelPipeline pipeline) {

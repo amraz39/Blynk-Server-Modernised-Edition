@@ -110,12 +110,20 @@ public class TestAppClient extends BaseTestAppClient {
         return new ChannelInitializer<>() {
             @Override
             protected void initChannel(SocketChannel ch) {
-                ch.pipeline().addLast(
-                        sslCtx.newHandler(ch.alloc(), host, port),
-                        new AppClientMessageDecoder(),
-                        new MobileMessageEncoder(new GlobalStats()),
-                        responseMock
-                );
+                if (sslCtx != null) {
+                    ch.pipeline().addLast(
+                            sslCtx.newHandler(ch.alloc(), host, port),
+                            new AppClientMessageDecoder(),
+                            new MobileMessageEncoder(new GlobalStats()),
+                            responseMock
+                    );
+                } else {
+                    ch.pipeline().addLast(
+                            new AppClientMessageDecoder(),
+                            new MobileMessageEncoder(new GlobalStats()),
+                            responseMock
+                    );
+                }
             }
         };
     }
