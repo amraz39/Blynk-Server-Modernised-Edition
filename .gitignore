@@ -6,4 +6,5 @@ target
 dependency-reduced-pom.xml
 *.OLD
 *.txt
+*.service
 /INTERNAL_USE

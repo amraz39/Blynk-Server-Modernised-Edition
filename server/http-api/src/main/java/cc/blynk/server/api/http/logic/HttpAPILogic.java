@@ -305,6 +305,29 @@ public class HttpAPILogic extends TokenBaseHttpHandler {
         }
 
         //todo may be optimized
+        // [TEXT HISTORY] Check for a text history file first.
+        // String pins (e.g. V3 engineering message) never produce a numeric .bin
+        // file so the csvGenerator path below would always return NoDataException
+        // for them. If a _text.txt file exists for this pin, serve it directly.
+        // The Python dashboard _fetch_raw_history() parses the
+        //   value,unix_ms_timestamp
+        // line format correctly for both numeric and string pins.
+        try {
+            java.nio.file.Path textFile = java.nio.file.Paths.get(
+                    reportingDao.dataFolder,
+                    cc.blynk.utils.FileUtils.getUserStorageDir(user.email, user.appName),
+                    "history_" + dashId + "_" + deviceId + "_"
+                    + pinType.pintTypeChar + pin + "_text.txt"
+            );
+            if (java.nio.file.Files.exists(textFile)) {
+                byte[] content = java.nio.file.Files.readAllBytes(textFile);
+                return ok(new String(content, java.nio.charset.StandardCharsets.UTF_8),
+                          "text/plain");
+            }
+        } catch (Exception e) {
+            log.debug("Error reading text history for pin {}.", pinString);
+        }
+
         try {
             java.nio.file.Path path = reportingDao.csvGenerator.createCSV(
                     user, dashId, deviceId, pinType, pin, deviceId);

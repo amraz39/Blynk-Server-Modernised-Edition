@@ -305,6 +305,21 @@ public class ReportingDiskDao implements Closeable {
                     ts, value, doubleVal);
         }
 
+        // [TEXT HISTORY] Store every pin value (numeric or string) to a per-pin
+        // append-only text file so that string pins such as V3 (engineering message)
+        // are retrievable via the /data/Vx HTTP endpoint.
+        //
+        // File format — one line per entry:
+        //   value,unix_ms_timestamp
+        //
+        // File path mirrors the numeric .bin convention:
+        //   {dataFolder}/{userDir}/history_{dashId}_{deviceId}_{pinType}{pin}_text.txt
+        //
+        // The file is served as-is by getPinHistoryData() in HttpAPILogic when no
+        // numeric .bin file exists for the requested pin. The Python dashboard
+        // _fetch_raw_history() already parses this format correctly.
+        storeTextHistory(user, dash.id, deviceId, pinType, pin, value, ts);
+
         //not a number, nothing to aggregate
         if (doubleVal == NumberUtil.NO_RESULT) {
             return;
@@ -320,6 +335,47 @@ public class ReportingDiskDao implements Closeable {
                     rawDataCacheForGraphProcessor.collect(key, new GraphValue(doubleVal, ts));
                 }
             }
+        }
+    }
+
+    /**
+     * Appends one CSV-style line to the per-pin text history file.
+     *
+     * Format:  value,unix_ms_timestamp\n
+     *
+     * Called for every incoming pin value regardless of whether it is
+     * numeric or a string. This allows string pins (e.g. V3 engineering
+     * message) to have a queryable history just like numeric pins.
+     *
+     * The file is intentionally append-only and unbounded. If size becomes
+     * a concern, extend ReportingTruncateWorker to also truncate _text.txt
+     * files using the same age-based logic applied to .bin files.
+     */
+    private void storeTextHistory(User user, int dashId, int deviceId,
+                                   PinType pinType, short pin,
+                                   String value, long ts) {
+        try {
+            java.nio.file.Path dir = java.nio.file.Paths.get(
+                    dataFolder,
+                    cc.blynk.utils.FileUtils.getUserStorageDir(user.email, user.appName)
+            );
+            java.nio.file.Files.createDirectories(dir);
+
+            java.nio.file.Path file = dir.resolve(
+                    "history_" + dashId + "_" + deviceId + "_"
+                    + pinType.pintTypeChar + pin + "_text.txt"
+            );
+
+            String line = value + "," + ts + "\n";
+
+            java.nio.file.Files.write(
+                    file,
+                    line.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+                    java.nio.file.StandardOpenOption.CREATE,
+                    java.nio.file.StandardOpenOption.APPEND
+            );
+        } catch (Exception e) {
+            log.trace("Error storing text history for pin {}{}", pinType.pintTypeChar, pin);
         }
     }
 

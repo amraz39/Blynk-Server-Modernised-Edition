@@ -79,6 +79,7 @@ This project is an unofficial community-maintained fork and is not affiliated wi
 - `System.out.println` replaced with Log4j2 throughout all production classes
 - `InterruptedException` handlers restored thread interrupt flag (was silently swallowed in `AcmeClient`)
 - `ConfigsLogic` silent `IOException` catch now logs a warning
+- Add possibility to save messages to database (saved in `/opt/blynk/data/<your_email>/history_*_V3_text.txt`)
 
 ---
 
