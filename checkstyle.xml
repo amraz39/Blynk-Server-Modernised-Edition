@@ -36,7 +36,11 @@
 
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
-    <module name="NewlineAtEndOfFile"/>
+    <!-- Use LF explicitly so validation is identical on Windows build hosts
+         and the Linux/Raspberry Pi deployment target. CRLF also terminates in LF. -->
+    <module name="NewlineAtEndOfFile">
+        <property name="lineSeparator" value="lf"/>
+    </module>
 
 
     <!-- Checks that property files contain the same keys.         -->

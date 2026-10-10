@@ -26,7 +26,7 @@
         <url>https://github.com/blynkkk/blynk-server.git</url>
         <connection>scm:git:ssh://git@github.com/blynkkk/blynk-server.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/blynkkk/blynk-server.git</developerConnection>
-        <tag>v0.41.2-SNAPSHOT</tag>
+        <tag>v0.41.18-SNAPSHOT</tag>
     </scm>
 
     <developers>
@@ -207,8 +207,10 @@
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
 
         <!-- dependencies -->
-        <netty.version>4.1.68.Final</netty.version>
-        <netty.boring.ssl.version>2.0.38.Final</netty.boring.ssl.version>
+        <!-- Netty 4.1.68 predates Java 21 by two years. Stay on the binary-compatible
+             4.1 line, but use its current security/bug-fix release. -->
+        <netty.version>4.1.139.Final</netty.version>
+        <netty.boring.ssl.version>2.0.76.Final</netty.boring.ssl.version>
         <log4j2.version>2.25.1</log4j2.version>
         <jackson-databind.version>2.20.2</jackson-databind.version>
         <disruptor.version>3.4.2</disruptor.version>

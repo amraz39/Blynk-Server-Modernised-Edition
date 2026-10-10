@@ -7,4 +7,21 @@ dependency-reduced-pom.xml
 *.OLD
 *.txt
 *.service
+*.apib
+*.yml
+blynk-deep-audit3.md
+blynk-server-analysis-improvements.md
+new-server-install.md
 /INTERNAL_USE
+/integration-tests
+/scripts
+/.vscode
+/client
+/docs
+
+# Keep only OUTPUT_TO_USE---ARM64 JAR in server folder
+/server/*
+!/server/OUTPUT_TO_USE---ARM64/
+/server/OUTPUT_TO_USE---ARM64/*
+!/server/OUTPUT_TO_USE---ARM64/server-0.41.18-java21.jar
+
