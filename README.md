@@ -196,6 +196,21 @@ The Java heap is not the same as process RSS. A service using a fixed 384 MiB he
 Current JVM command excerpt:
 
 ```ini
+[Unit]
+Description=Blynk Server
+After=network-online.target
+Wants=network-online.target
+
+StartLimitIntervalSec=120
+StartLimitBurst=5
+StartLimitAction=none
+
+[Service]
+Type=simple
+User=*****
+WorkingDirectory=/opt/blynk
+
+
 Environment="MALLOC_ARENA_MAX=1"
 
 ExecStart=/usr/bin/java \
@@ -222,6 +237,42 @@ ExecStart=/usr/bin/java \
     -jar /opt/blynk/server-0.41.18-java21.jar \
     -dataFolder /opt/blynk \
     -workerThreads 4
+
+Restart=always
+RestartSec=15
+TimeoutStopSec=30
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=blynk
+LogRateLimitIntervalSec=30
+LogRateLimitBurst=1000
+
+MemoryHigh=768M
+MemoryMax=1G
+MemorySwapMax=0
+
+OOMScoreAdjust=200
+TasksMax=128
+
+Nice=0
+
+# Hardening.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/blynk
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 The complete resource limits and hardening options are in `blynk.service`.
@@ -255,7 +306,7 @@ Install the new files and restart:
 
 ```bash
 sudo systemctl stop blynk
-sudo install -o ptut -g ptut -m 0644 \
+sudo install -o <user> -g <user> -m 0644 \
   /home/shared/server-0.41.18-java21.jar \
   /opt/blynk/server-0.41.18-java21.jar
 sudo install -o root -g root -m 0644 \
